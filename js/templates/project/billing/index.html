@@ -1,0 +1,27 @@
+<div class="actoins">
+    <div id='billing_year_select' class="pull-right">
+        <select ng-model="selected_year" class='input-small' ng-options="year for year in
+            select_years">
+        </select>
+        <a href="" target="_blank">
+            <i class="icon-book"></i>
+        </a>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="std-center-wrapper center_wrapper activable">
+    <div class="upper_region">
+        <div angrid="gridOptions"></div>
+    </div>
+    <div></div>
+    <div class="buttom_region">
+        <div class="tabbable">
+            <div class="tab-pane" title="Detail">
+                <div class="std-center-wrapper">
+                    <div angrid="detailGridOptions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

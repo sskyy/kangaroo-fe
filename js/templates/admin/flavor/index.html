@@ -1,0 +1,27 @@
+<div class="actions">
+    <button class="btn btn-small btn-primary"
+        ng-click="open_create_flavor()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create Flavor"|i18n}}
+    </button>
+
+    <button class="btn btn-small btn-danger"
+        ng-disabled="selectedItems.length==0"
+        ng-click="open_confirm_dialog()">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Flavors"|i18n}}
+    </button>
+</div>
+<div id="flavor_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+<div ui-modal ng-model="create_flavor_shown" class="fade">
+    <create-flavor-modal modal-shown="create_flavor_shown"></create-flavor-modal>
+</div>
+<div ui-modal ng-model="confirm_dialog_shown" class="fade">
+    <confirm-dialog action="delete_flavors()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>

@@ -1,0 +1,107 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="closeModal()">x</a>
+        <h3>{{"Connect to an instance"|i18n}}</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="alert" id="con_prerequisites">
+            <p>
+            <strong>{{"Prerequisites"|i18n}}</strong>
+            </p>
+            <ol>
+                <li>
+                <strong>{{"Enable SSH port"|i18n}}</strong> -- {{"Open the instance's SSH port (usually on port 22)"|i18n}}.
+                </li>
+                <li>
+                <strong>{{"Instance's public SSH DNS"|i18n}}</strong> -- Domain, port.
+                </li>
+                <li>
+                <strong>{{"Private key"|i18n}}</strong> -- {{"Get the path to your private key in your local machine."|i18n}}
+                </li>
+            </ol>
+        </div>
+
+        <div>
+            <div class="tabbable tabs-left" >
+              <div class="tab-pane" title="{{'From Linux Client'|i18n}}" value="linux">
+                    <ol>
+                        <li>
+                        <p>{{"Your key file must not be publicly viewable for SSH to work.Use this command if necessary"|i18n}}</p>
+                            <div class="alert">
+                                <p>chmod 400 <span
+                                    class="text-error">{{keypair}}.pem</span></p>
+                            </div>
+                        </li>
+                        <li>
+                        <p>{{"Connect to your instance using its Public SSH DNS."|i18n}}</p>
+                            <div class="alert">
+                                <p>ssh -i <span
+                                    class="text-error">{{keypair}}.pem</span>
+                                root@<span class="text-error">{{domain}}</span>
+                                -p <span class="text-error">{{port}}</span></p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="tab-pane" title="{{'From Windows Client'|i18n}}" value="windows">
+                    <ol>
+                        <li>
+                        <p>{{"Get PuTTY and PuTTYgen."|i18n}}</p>
+                            <div class="alert">
+                                <p>
+                                <strong class="title">{{"Official"|i18n}}</strong>
+                                    <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html</a>
+                                </p>
+                                <!--
+                                <p>
+                                    <strong class="title">SWS</strong>
+                                    <a href="#">Download PuTTY</a>
+                                    <a href="#">Download PuTTYgen</a>
+                                </p>
+                                -->
+                            </div>
+                        </li>
+                        <li>
+                        <p>{{"Convert your private key file."|i18n}}</p>
+                            <div class="alert">
+                                <p>
+                                    PuTTYgen can convert <span
+                                        class="text-error">{{keypair}}.pem</span> to .ppk format. 
+                                    <!--
+                                    <a href="http://docs.sws.sina.com.cn/content/instance.html">See Connecting to instance</a>
+                                    -->
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        <p>{{"Connect using PuTTY SSH."|i18n}}</p>
+                            <div class="alert">
+                              <p>{{"Enter Host name"|i18n}} <span
+                                    class="text-error">{{domain}}</span>
+                                  {{"and port"|i18n}} <span
+                                    class="text-error">{{port}}</span>,
+                                  {{"import"|i18n}} <span
+                                    class="text-error">{{keypair}}.pem</span>
+                                  {{"file"|i18n}}.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="tab-pane" title="Web VNC" value="vnc">
+                    <center>
+                      <p>{{"VNC is a web console which you can quickly connect your instance without any SSH client"|i18n}}</p>
+                        <button ng-click="open_vnc()" class="btn btn-primary btn-large">
+                            <i class="icon-vnc"></i>
+                            VNC
+                        </button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" ng-click="closeModal()">{{"Close"|i18n}}</a>
+    </div>
+
+</div>

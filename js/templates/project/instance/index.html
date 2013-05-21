@@ -1,0 +1,244 @@
+<div class="actions">
+    <!-- <button class="btn btn-create" ng-click="open_launch_instance()"> -->
+    <button class="btn btn-create" ng-click="createInstance()">
+        <i class="icon-icon"></i>
+        {{"Launch Instance"|i18n}}
+    </button>
+    <button class="btn btn-connect" ng-click="open_connect_instance()"
+        ng-disabled="selectedItems.length!=1">
+        <i class="icon-icon"></i>
+        {{"Connect"|i18n}}
+    </button>
+
+    <div class="btn-group">
+        <a href="#" class="btn dropdown-toggle">
+            {{"Actions"|i18n}}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="open_edit_instance()"
+                    disabled="selectedItems.length!=1">
+                    <i class="icon-edit"></i>
+                    {{"Edit Instance"|i18n}}
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="open_console_output()"
+                    disabled="check_action_disabled({'type': 'view_log'})">
+                    <i class="icon-th-list"></i>
+                    {{"View Log"|i18n}}
+                </a>
+            </li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="open_take_snapshot()"
+                    disabled="check_action_disabled({'type': 'take_snapshot'})">
+                    <i class="icon-camera"></i>
+                    {{"Snapshot"|i18n}}
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="action_on_instance({'type': 'toggle_pause'})"
+                    disabled="check_action_disabled({'type': 'toggle_pause'})">
+                    <i class="icon-pause"></i>
+                    {{label_toggle({'type': 'toggle_pause'})|i18n}}
+                </a>
+            </li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="action_on_instance({'type': 'toggle_suspend'})"
+                    disabled="check_action_disabled({'type': 'toggle_suspend'})">
+                    <i class="icon-stop"></i>
+                    {{label_toggle({'type': 'toggle_suspend'})|i18n}}
+                </a>
+            </li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="action_on_instance({'type': 'toggle_stop'})"
+                    disabled="check_action_disabled({'type': 'toggle_stop'})">
+                    <i class="icon-stop"></i>
+                    {{label_toggle({'type': 'toggle_stop'})|i18n}}
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="action_on_instance({'type': 'reboot'})"
+                    disabled="check_action_disabled({'type': 'reboot'})">
+                    <i class="icon-repeat"></i>
+                    {{"Restart Instance"|i18n}}
+                </a>
+            </li>
+            <li>
+                <a drop-down-btn class="btn-small"
+                    on-click="open_confirm_dialog()"
+                    disabled="selectedItems.length==0">
+                    <i class="icon-trash"></i>
+                    {{"Delete Instances"|i18n}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id='instance_center_wrapper' class="std-center-wrapper center_wrapper activable">
+    <div class="upper_region">
+        <div angrid="gridOptions" class="clearFix">
+        </div>
+    </div>
+    <div></div>
+    <div class="buttom_region">
+        <div class="tabbable">
+            <div class="tab-pane" title="Detail">
+                <table class="table detail table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="title">Instance Name</th>
+                            <th>{{selectedItems[0].name}}</th>
+                        </tr>  
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="title">{{ "Flavor" | i18n }}</td>
+                            <td class="content">{{displayItem.flavor.name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Image Name" | i18n }}</td>
+                            <td class="content">
+                                {{displayItem.image.name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Key Name" | i18n }}</td>
+                            <td class="content">{{displayItem.key_name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Private Ip" | i18n }}</td>
+                            <td class="content">{{displayItem.private_ip}}</td>
+                        </tr>
+                        <tr ng-show="is_loadbalance_enabled">
+                            <td class="title">{{ "SSH Domain" | i18n }}</td>
+                            <td class="content">{{displayItem.ssh_domain}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Security Groups" | i18n }}</td>
+                            <td class="content">
+                                <a href="./security_group" ng-repeat="sg in displayItem.security_groups">{{sg.name}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Status" | i18n }}</td>
+                            <td class="content">{{displayItem.status }}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Instance ID" | i18n }}</td>
+                            <td class="content">{{displayItem.id}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Created" | i18n }}</td>
+                            <td class="content">{{displayItem.created}}</td>
+                        </tr>
+                        <tr ng-show="is_dough_enabled">
+                            <td class="title">{{ "Payment Type" | i18n }}</td>
+                            <td class="content">{{ displayItem.flavor| payment_type_filter }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- tab for instance monitor -->
+            <div class="tab-pane" title="Monitoring" ng-show="is_kanyun_enabled">
+                <div >
+                    <span>{{"Time Range"|i18n}}</span>
+                    <select id="time_range" class="input-small"
+                        ng-change="time_range_changed()" ng-model="time_range"
+                        ng-options="item.value as item.name for item in time_ranges">
+                    </select>
+
+                    <span>{{"Time Period"|i18n}}</span>
+                    <select id="time_period" class="input-small"
+                        ng-change="time_period_changed()" ng-model="time_period"
+                        ng-options="item.value as item.name for item in
+                        time_periods">
+                    </select>
+                </div>
+                
+                <div class="row-fluid" style="height:300px;width:1000px">
+                    <small-chart 
+                        chart_id="cpu" 
+                        id="selected_uuid"
+                        metric="cpu"
+                        time_range="time_range"
+                        time_period="time_period">
+                    </small-chart>
+                    <small-chart 
+                        chart_id="blk_read" 
+                        id="selected_uuid"
+                        metric="blk_read"
+                        time_range="time_range"
+                        time_period="time_period">
+                    </small-chart>
+                    <small-chart 
+                        chart_id="blk_write" 
+                        id="selected_uuid"
+                        metric="blk_write"
+                        time_range="time_range"
+                        time_period="time_period">
+                    </small-chart>
+                    <small-chart 
+                        chart_id="vmnetwork" 
+                        id="selected_uuid"
+                        metric="vmnetwork"
+                        time_range="time_range"
+                        time_period="time_period">
+                    </small-chart>
+                    <small-chart 
+                        chart_id="nic_incoming" 
+                        id="selected_uuid"
+                        metric="nic_incoming"
+                        time_range="time_range"
+                        time_period="time_period">
+                    </small-chart>
+                    <small-chart 
+                        chart_id="nic_outgoing" 
+                        id="selected_uuid"
+                        metric="nic_outgoing"
+                        time_range="time_range"
+                        time_period="time_period">
+                    </small-chart>
+
+                    <!--
+                    <chart id="blk_read"></chart>
+                    <chart id="blk_write"></chart>
+                    <chart id="vmnetwork"></chart>
+                    <chart id="nic_incoming"></chart>
+                    <chart id="nic_outgoing"></chart>
+                    -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ui-modal id="launch_instance_popmodal" class="fade" ng-model="launch_instance_shown">
+    <launch-instance launch_instance_shown='launch_instance_shown'></launch-instance>
+</div>
+<div ui-modal id="connect_instance_popmodal" class="fade" ng-model="connect_instance_shown">
+    <connect-instance modal-shown='connect_instance_shown'></connect-instance>
+</div>
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_instances()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>
+<div ui-modal class="fade" ng-model="edit_instance_shown">
+    <edit-instance modal-shown="edit_instance_shown"></edit-instance>
+</div>
+<div ui-modal class="fade" ng-model="take_snapshot_shown">
+    <take-snapshot modal-shown="take_snapshot_shown"></take-snapshot>
+</div>

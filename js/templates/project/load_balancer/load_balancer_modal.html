@@ -1,0 +1,149 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <div ng-switch on="editLoadBalancer">
+            <h3 ng-switch-when="false">{{"Create LB"|i18n}}</h3>
+            <h3 ng-switch-when="true">{{"Edit LB"|i18n}}</h3>
+        </div>
+    </div>
+
+<form novalidate name="load_balancer_form" id="load_balancer_form"
+        class="form-horizontal ng-pristine ng-valid"  method="POST"
+        ng-submit="submit()">
+      <div class="modal-body clearfix">
+          <div class="actions span7">
+            <fieldset>
+              <table class="table-form">
+                  <!-- Load Balancer Name -->
+                <tr>
+                  <td>
+                    <label>{{"Load Balancer Name" | i18n }} <span class="required">*</span> </label>
+                  </td>
+                  <td class="input small">
+                    <input type="text" name="load_balancer_name" ng-model="load_balancer_name"
+                        required load-balancer-name-valid minlength="0" maxlength="40" >
+                    <span class="tag">{{load_balancer_name.length || 0}}/40</span>
+                    <div class="help-block">
+                        <div class="help-line" 
+                            ng-show="load_balancer_form.load_balancer_name.$error.max_length_limit">
+                            不应超过40个字符</div>
+                        <div class="help-line" 
+                            ng-show="load_balancer_form.load_balancer_name.$error.illegal_characters">
+                            含有非法字符</div>
+                        <div class="help-line" 
+                            ng-show="load_balancer_form.load_balancer_name.$error.required">
+                            请输入名称</div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- protocol -->
+                <tr>
+                  <td>
+                    <label>{{"Protocol" | i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="form-inline">
+                    <label class="radio">
+                      <input type="radio" name="protocol" ng-model="protocol" value="http" required
+                        ng-init="protocol='http'">
+                      {{"HTTP, Layer 7" | i18n}}
+                    </label>
+                    <label class="radio">
+                      <input type="radio"  name="protocol" ng-model="protocol" value="tcp" required> 
+                      {{"TCP, Layer 4" | i18n}}
+                    </label>
+                    <div class="help-block">
+                        <div class="help-line"
+                            ng-show="load_balancer_form.protocol.$error.required"
+                            >请选择一种协议类型</div>
+                        
+                    </div>
+                  </td>
+                </tr>
+                <!-- Instance Port -->
+                <tr>
+                  <td>
+                    <label>{{"Instance Port" | i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="input small">
+                    <input type="text" name="instance_port" ng-model="instance_port" required instance-port-valid>
+                    <span class="tag">1-65536</span>
+                    <div class="help-block">
+                        <div class="help-line"
+                        ng-show="load_balancer_form.instance_port.$invalid">非法的端口号</div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Balancing Method -->
+                <tr>
+                  <td>
+                    <label>{{"Balancing Method" | i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="form-inline">
+                    <label class="radio">
+                      <input type="radio" name="balancing_method" ng-model="balancing_method" value="round_robin" required
+                        ng-init="balancing_method='round_robin'">
+                      {{"Round Robin" | i18n}}
+                    </label>
+                    <label class="radio">
+                      <input type="radio"  name="balancing_method" ng-model="balancing_method" value="source_binding" required> 
+                      {{"Source Binding" | i18n}}
+                    </label>
+                    <div class="help-block">
+                        <div class="help-line"
+                            ng-show="load_balancer_form.balancing_method.$error.required"
+                            >请选择一个平衡方法</div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Instance -->
+                <tr>
+                  <td>
+                    <label>{{"Instance" | i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="form-inline input small">
+                    <select multiple="multiple" required
+                        name="instance"
+                        ng-model="instance">
+                      <option ng-repeat="item in instances"
+                      value="{{item.id}}">{{item.name}}</option>
+                    </select>
+                    <!-- <a class="btn pull-right btn-mini">{{"Select Instance"}}</a> -->
+                    <div class="help-block" style="margin-top:0">
+                        <div class="help-line"
+                            ng-show="load_balancer_form.instance.$error.required"
+                            >请至少选择一台云主机</div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Server Name -->
+                <tr ng-show="protocol=='http'">
+                  <td>
+                    <label>{{"Domain" | i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="input small">
+                    <input type="text" name="server_name" ng-model="server_name" required server-name-valid>
+                    <span class="tag">{{"bla bla"}}</span>
+                    <div class="help-block">
+                        <div class="help-line"
+                            ng-show="load_balancer_form.server_name.$error.required"
+                            >请输入您的域名</div>
+                        <div class="help-line"
+                            ng-show="load_balancer_form.server_name.$error.baddomain"
+                            >非法的域名</div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </div>
+      </div> <!-- end of modal-body -->
+
+      <div class="modal-footer">
+        <div class="pull-right">
+            <a class="btn" ng-click="close_modal()">{{'Cancel'|i18n}}</a>
+            <input ng-disabled="!can_submit(load_balancer_form)" 
+                class="btn btn-primary" type="submit" value="{{'Create'|i18n}}">
+        </div>
+      </div>
+    </form>
+</div>

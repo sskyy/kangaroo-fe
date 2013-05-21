@@ -1,0 +1,51 @@
+<div id='instance_center_wrapper' class="center_wrapper std-center-wrapper activable">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+    <div></div>
+    <div class="buttom_region">
+
+        <div class="tabbable">
+            <div class="tab-pane" title="{{'Detail'|i18n}}">
+                <table class="table detail table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="title">{{ "Instance Name" | i18n }}</th>
+                            <th>{{selectedItems[0].name}}</th>
+                        </tr>  
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="title">{{ "Instance Id" | i18n }}</td>
+                            <td class="content">{{selectedItems[0].id}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{ "Flavor" | i18n }}</td>
+                            <td class="content">{{displayItem.flavor.value}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Image Name" | i18n }}</td>
+                            <td class="content">
+                                {{displayItem.image.origin.name}}
+                            </td>
+                        </tr><tr>
+                            <td class="title">{{ "Key Name" | i18n }}</td>
+                            <td class="content">{{displayItem.key_name.value}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Private Ip" | i18n }}</td>
+                            <td class="content">{{displayItem.private_ip.value}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Security Groups" | i18n }}</td>
+                            <td class="content">
+                                <a href="./security_group" ng-repeat="sg in displayItem.security_groups.origin">{{sg.name}}</a>
+                            </td>
+                        </tr><tr>
+                            <td class="title">{{ "Status" | i18n }}</td>
+                            <td class="content">{{displayItem.status.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

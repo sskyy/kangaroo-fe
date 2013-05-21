@@ -1,0 +1,188 @@
+<div>
+<form novalidate name="launch_instance_form" id="launch_instance_form"
+        class="form-horizontal ng-pristine ng-valid"  method="POST"
+        ng-submit="create_instance()">
+        <div class="row-fluid">
+          <div class="actions span7">
+            <fieldset>
+              <table class="table-form">
+                  <!-- image or snapshot -->
+                <tr>
+                  <td>
+                    <label for="image_id">{{'Image'|i18n}} <span class="required">*</span> </label>
+                  </td>
+                  <td class="input small">
+                    <select ng-model="user_image_type" ng-init="user_image_type = 'image'" required>
+                      <option value="image" >{{'Image'|i18n}}</option>
+                      <option value="snapshot">{{'Snapshot'|i18n}}</option>
+                    </select>
+                  </td>
+                  <td class="input small" >
+                      <select ng-model="image_uuid"
+                          ng-show="user_image_type=='image'" required
+                          ng-options="image.id as image.name for image in images">
+                      </select>
+                      <select ng-model="snapshot_uuid"
+                          ng-show="user_image_type=='snapshot'" required
+                        ng-options="snapshot.id as snapshot.name for snapshot in snapshots">
+                      </select>
+                  </td>
+
+                </tr>
+                <!-- payment method -->
+                <tr ng-show="is_dough_enabled">
+                  <td>
+                    <label for="id_payment_type">{{'Payment Type'|i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="form-inline" colspan="2">
+                    <label class="radio">
+                      <input type="radio" name="payment_type" ng-model="payment_type" value="hourly"> {{'Hourly'|i18n}}
+                    </label>
+                    <label class="radio">
+                      <input type="radio"  name="payment_type" ng-model="payment_type" value="monthly"> {{'Monthly'|i18n}}
+                    </label>
+                  </td>
+                </tr>
+                <!-- flavor info -->
+                <tr>
+                  <td>
+                    <label for="id_flavor_name">{{'Flavor'|i18n}} <span class="required" >*</span> </label>
+                  </td>
+                  <td class="input small">
+                    <!-- dropdowntable is an angular component -->
+                    <dropdowntable
+                        flavor_selected="flavorSelected">
+                    </dropdowntable>
+                  </td>
+                  <td>
+                      <label id="price-label">{{flavor_price()}}</label>
+                  </td>
+                </tr>
+                <!-- server name -->
+                <tr>
+                  <td>
+                    <label for="id_instance_name">{{'Instance Name'|i18n}} <span class="required">*</span> </label>
+                  </td>
+                  <td class="input small">
+                    <input ng-model="instance_name" required id="id_instance_name"  type="text" name="instance_name" minlength="0" maxlength="40" >
+                  </td>
+                  <td>
+                    <label>{{instance_name.length || 0}}/40</label>
+                  </td>
+                </tr>
+                <!-- copied -->
+                <tr>
+                    <td>
+                        <label for="instance_copies">{{'Copies'|i18n}} <span class="required">*</span></label>
+                    </td>
+                    <td class="input small">
+                        <select name="instance_copies"
+                            ng-model="instance_copies"
+                            ng-options="copy for copy in instanceCopies">
+                        </select>
+                    </td>
+                </tr>
+                <!-- keypair -->
+                <tr ng-show="need_keypair()">
+                  <td>
+                    <label for="id_keypair">{{'Keypair'|i18n}}
+                      <span class="required">*</span>
+                    </label>
+                  </td>
+                  <td class="input small" colspan=2 >
+                    <select required name="instance_keypair"
+                        ng-model="instance_keypair" ng-options="key.name for key in keypairs">
+                    </select>
+                  <!-- </td>
+                  <td> -->
+                    <a class="btn btn-small pull-right"
+                        ng-click="open_create_keypair_modal()">{{'Create Keypair'|i18n}}</a>
+                  </td>
+                </tr>
+                <!-- security group -->
+                <tr>
+                  <td>
+                    <label for="id_security_groups">{{'Security Group'|i18n}}
+                      <span class="required">*</span>
+                    </label>
+                  </td>
+                  <td class="input medium" colspan=2 >
+                    <select multiple="multiple" required
+                        name="security_groups"
+                        ng-model="instance_sg">
+                      <option ng-repeat="sg in security_groups"
+                      value="{{sg.name}}">{{sg.name}}</option>
+                    </select>
+                  <!-- </td>
+                  <td> -->
+                    <a class="btn btn-small pull-right"
+                        ng-click="open_create_sg_modal()">{{'Create Security Group'|i18n}}</a>
+                  </td>
+                </tr>
+                <!-- use script -->
+                <tr>
+                  <td><label for="id_user_data">{{'User Data'|i18n}}</label></td>
+                  <td class="form-inline" colspan="2">
+                    <textarea id="id_user_data"  ng-model="user_data" rows="4" cols="50" name="user_data"></textarea>
+                  </td>
+                  <td>&nbsp;</td>
+                </tr>
+
+              </table>
+            </fieldset>
+          </div>
+          <div class="help_text span5">
+            <!-- right of dialog -->
+            <div class="Quota" id="launchInstanceQuota" title="配额">
+              <div class="head">
+                <span class="title">{{'Quota'|i18n}}</span>
+                <a class="apply" href="http://contactwithsws.sinaapp.com/" target="_blank">{{'apply for more'|i18n}}</a>
+              </div>
+              <div class="body">
+                <quotaitem ng-repeat="(name, quota) in quotas"
+                resource-name="name"
+                resource-raw-limit = 'quota.raw_limit'
+                resource-raw-used = 'quota.raw_used'
+                flavor_selected="flavorSelected"
+                copies="instance_copies"
+                >
+                </quotaitem>
+              </div>
+            </div>
+
+            <div ng-show="is_dough_enabled" class="balance-node" id="balanceNode" title="余额" widgetid="balanceNode">
+                <!-- balance -->
+              <div class="head">
+                <span class="title">{{'Balance'|i18n}}</span>
+                <span>{{"Current Charge"|i18n}}: {{current_charge()}}</span>
+              </div>
+              <div class="body">
+                <div class="row-fluid">
+                  <div class="span4 offset1">
+                    <span class="box"><p>{{balance_remaining}} CNY</p></span>
+                    <p class="label">Balance</p>
+                  </div>
+                  <div class="span4 offset2">
+                    <span class="box"><p>{{coupon_remaining}}</p></span>
+                    <p class="label">Coupon</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn" ng-click="$cancel()">{{'Cancel'|i18n}}</a>
+        <input id="yes_btn" ng-disabled="unable_to_create_instance(launch_instance_form)" class="btn btn-primary" type="submit" value="{{'Launch Instance'|i18n}}">
+    </form>
+
+
+<!--     <div id="security_group_add_popmodal" ui-modal class="fade" ng-model="sg_modal_shown">
+        <sg modal-shown="sg_modal_shown" update-sg="update_sg"></sg>
+    </div>
+    <div id="keypair_popmodal" ui-modal class="fade" ng-model="keypair_modal_shown">
+        <keypairmodal keypair-modal-shown="keypair_modal_shown" import-keypair="import_keypair"></keypairmodal>
+    </div> -->
+
+
+  </div>

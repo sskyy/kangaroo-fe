@@ -1,0 +1,71 @@
+.notify_window {
+    z-index: 1000;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    a.action {
+        margin-right: 10px;
+        font-size: 20px;
+        color: #999;
+        text-decoration: none;
+        &:hover {
+            color: black;
+            transition: color 1s ease;
+            -o-transition: color 1s ease;
+            -moz-transition: color 1s ease;
+            -webkit-transition: color 1s ease;
+        }
+    }
+    .notify_normal {
+        border: 2px solid #BDBBC9;
+        width: 300px;
+        height: 200px;
+        .notify_title_bar {
+            background-color: #f4f4f4;
+            width: 100%;
+            height: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            .title {
+                padding-left: 5px;
+            }
+            .clear_msg, .toggle_minize {
+                float: right;
+            }
+        }
+        .notify_msg_win {
+            height: 170px;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #fff;
+            .msg_wrapper {
+                word-wrap: break-word;
+                overflow: hidden;
+                padding: 5px;
+            }
+            .info_msg {
+                color: black;
+            }
+            .error_msg {
+                color: red;
+            }
+            .warn_msg {
+                color: #DFDC9B;
+            }
+        }
+    }
+
+    .notify_min {
+        width: 1.5em;
+        height: 1.5em;
+        border: 1px solid black;
+        text-align: center;
+        border-radius: 1em;
+        a {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
+}

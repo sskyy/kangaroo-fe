@@ -1,0 +1,43 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <h3>{{"Update Project"|i18n}}</h3>
+    </div>
+    <form novalidate class="form-horizontal" name="create_project_form"
+        ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{"Name"|i18n}}</label>
+                <div class="controls"><input type="text" ng-model="name"
+                    name="name"/></div>
+            </div>
+            <div class="control-group">
+                <label for="" class="control-label">{{"Descrption"|i18n}}</label>
+                <div class="controls"><input type="text" ng-model="description"
+                    name="description"/></div>
+            </div>
+            <div class="control-group">
+                <label for="" class="control-label">{{'Enabled'|i18n}}</label>
+                <div class="controls">
+                    <input type="checkbox" ng-model="enabled" name="enabled"/></div>
+            </div>
+
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">Description</span>
+                </div>
+                <div class="body">
+                    <p>
+                    From here, you can edit a project.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary pull-right"
+            value="{{'Create Project'|i18n}}"/>
+            <a class="btn cancel"
+                ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+        </div>
+    </form>
+</div>

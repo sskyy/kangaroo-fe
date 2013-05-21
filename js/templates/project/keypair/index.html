@@ -1,0 +1,29 @@
+<div class="actions">
+    <button class="btn btn-create" ng-click="open_create_keypair_modal()">
+    	<i class="icon-white icon-plus-sign"></i>
+    	{{"Create Keypair"|i18n}}
+    </button>
+    <button class="btn btn-import" ng-click="open_import_keypair_modal()">
+    	{{"Import Keypair"|i18n}}
+    </button>
+    <button class="btn btn-delete" ng-click="open_confirm_dialog()"
+        ng-disabled="selectedItems.length==0">
+    	<i class="icon-icon"></i>
+    	{{"Delete Keypair"|i18n}}
+    </button>
+</div>
+
+<div id="keypair_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+<div id="keypair_popmodal" ui-modal class="fade" ng-model="keypair_modal_shown">
+    <keypairmodal keypair-modal-shown="keypair_modal_shown" import-keypair="import_keypair"></keypairmodal>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_keypairs()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>

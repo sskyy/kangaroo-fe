@@ -1,0 +1,60 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_update_snapshot()">x</a>
+        <h3>{{"Update Snapshot"|i18n}}</h3>
+    </div>
+    <form novalidate name="update_snapshot_form" id="update_snapshot_form"
+        class="form-horizontal "
+        ng-submit="update_snapshot()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{"Name"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="snapshot_name"
+                    ng-model="snapshot_name" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{"Kernel ID"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="kernel_id"
+                    ng-model="kernel_id" readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{"Ram ID"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="ramdisk_id"
+                    ng-model="ramdisk_id" readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{"Architecture"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="architecture"
+                    ng-model="architecture" readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{"Container Format"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="container_format"
+                    ng-model="container_format" readonly/>
+                </div>
+            </div>       
+            <div class="control_group">
+                <label class="control-label">{{"Disk Format"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="disk_format"
+                    ng-model="disk_format" readonly/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn cancel"
+                ng-click="close_update_snapshot()">{{"Cancel"|i18n}}</a>
+            <input type="submit" class="btn btn-primary" value="{{'Update Snapshot'|i18n}}"/>
+            
+        </div>
+    </form>
+</div>

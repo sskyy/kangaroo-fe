@@ -1,0 +1,31 @@
+<div>
+    <div class="modal-header">
+		<a class="close" ng-click="close_create_ap_modal()">x</a>
+        <h3>{{"Create Apply Code"|i18n}}</h3>
+    </div>
+    <form novalidate class="form-horizontal" name="create_ap_form"
+        ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{"Count"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="count" ng-model="count" required/>
+                </div>
+            </div>
+
+            <div class="style-quota">
+				<div class="head">
+					<span class="title">Description</span>
+				</div>
+                <div class="body">
+                    <p>{{"used to register"|i18n}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+			<input class="btn btn-primary pull-right"
+            type="submit" value="Create"/>
+			<a class="btn" ng-click="close_create_ap_modal()">Cancel</a>
+        </div>
+    </form>
+</div>

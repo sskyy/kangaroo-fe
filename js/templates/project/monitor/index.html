@@ -1,0 +1,74 @@
+<div class="monitor_wrapper">
+    <div class="actions clear-fix">
+        <span>{{'Product' | i18n}} : </span>
+        <select ng-model="display_product" class="input-small"
+            ng-options="product.type as product.name for product in products">
+        </select>
+    </div>
+
+
+    <div class="center_wrapper std-center-wrapper activable">
+        <div class="upper_region">
+            <div angrid="gridOptions"></div>
+        </div>
+        <div></div>
+        <div class="buttom_region">
+            <div class="tabbable">
+                <div class="tab-pane" title="Monitor">
+                    <div id="monitor_action" class="clearfix">
+                        <span class="monitor_label_span">{{current_metric|i18n}}</span>
+                        <span class="monitor_label_span">
+                            <span>{{"Statistic Method"|i18n}}</span>
+                            <span>
+                                <select ng-model="statistic_method" class="input-small" 
+                                    ng-options="method for method in statistic_methods"></select>
+                            </span>
+                        </span>
+                        <span class="monitor_label_span">
+                            <span>{{"Time Range"|i18n}}</span>
+                            <span>
+                                <select ng-model="time_range" class="input-small"
+                                    ng-options="range for range in time_ranges"></select>
+                            </span>
+                        </span>
+                        <span class="monitor_label_span">
+                            <span>{{"Period"|i18n}}</span>
+                            <span>
+                                <select ng-model="time_period" class="input-small"
+                                    ng-options="period for period in time_periods"></select>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="clear-fix"></div>
+                    <div style="height:400px;position:relative;padding-top:20px" >
+                        <chart id="chartAlarm" style="height:100%"
+                        title="Alarm" datasource="" dataconfig="{}"
+                        color="['#777']" with-paging=1 
+                        metric="current_metric"
+                        uuid="selected_uuid"
+                        statistic_method="statistic_method"
+                        time_range="time_range"
+                        time_period="time_period">
+                        </chart>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!--
+        <p>chart grid</p>
+        <div class="row-fluid" style="height:200px">
+            <chart id="chartDiskR" class="span3" style="height:100%" title="Disk Read">
+            </chart>
+            <chart id="chartDiskW" class="span3" style="height:100%" title="Disk Write">
+            </chart>
+            <chart id="chartDataTransOut" class="span3" style="height:100%" title="Data Transfer Out">
+            </chart>
+        </div>
+        <p>big chart</p>
+        -->
+
+</div>

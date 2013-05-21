@@ -1,0 +1,28 @@
+<div class="actions">
+    <button class="btn btn-primary btn-small"
+        ng-click="open_create_ap()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create Apply Code"|i18n}}
+    </button>
+    <button class="btn btn-small btn-danger" 
+        ng-click="open_confirm_dialog()"
+        ng-disabled="selectedItems.length==0">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Apply Code"|i18n}}
+    </button>
+</div>
+
+<div id="apply_code_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+<div class="fade" ui-modal ng-model="create_ap_shown">
+    <create-apply-code create-ap-shown='create_ap_shown'></create-apply-code>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_aps()" confirm_dialog_shown="confirm_dialog_shown"></confirm-dialog>
+</div>

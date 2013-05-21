@@ -1,0 +1,48 @@
+.usage_chart_wrapper {
+    float: left;
+    .usage_chart {
+        width: 200px;
+        height: 200px;
+    }
+    .usage_chart_label {
+        width: 200px;
+        text-align: center;
+        color: #59ad58;
+        font-size: 18px;
+    }
+    .usage_percent {
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        z-index: 1000;
+        color: #59ad58;
+    }
+}
+
+.node_panel_title {
+    .node_host_name {
+    
+    }
+    .node_host_list {
+    
+    }
+}
+
+.vm_node (@bg_c:#66c664, @bg_c_selected:#3C782E) {
+    background: @bg_c;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-right: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    .vm_node_selected {
+        background: @bg_c_selected;
+    }
+}
+
+.vm_node_active {
+    .vm_node
+}

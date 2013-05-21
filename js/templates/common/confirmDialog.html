@@ -1,0 +1,14 @@
+<div>
+    <div class="modal-header">
+        <a  class="close" ng-click="close_confirm_dialog()">x</a>
+        <h3>{{_title|i18n}}</h3>
+    </div>
+    <div class="modal-body">
+        {{_msg|i18n}}
+    </div>
+    <div class="modal-footer">
+        <buttton ng-disabled="submitted" class="btn btn-primary pull-right"
+        ng-click="perform_action()">{{"OK"|i18n}}</buttton>
+        <a class="btn" ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+    </div>
+</div>

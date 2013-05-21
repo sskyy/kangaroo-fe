@@ -1,0 +1,16 @@
+<div class="actions">
+    <button class="btn btn-small btn-primary" ng-click="open_create_coupon()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create Coupon"|i18n}}
+    </button>
+</div>
+<div id="coupon_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+<div class="fade" ui-modal ng-model="create_coupon_shown">
+    <create-coupon-modal modal-shown="create_coupon_shown"></create-coupon-modal>
+</div>

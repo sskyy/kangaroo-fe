@@ -1,0 +1,49 @@
+<div class="actions">
+    <button class="btn btn-small btn-danger" ng-click="open_confirm_dialog()"
+        ng-disabled="selectedItems.length==0">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Volumes"|i18n}}
+    </button>
+</div>
+
+<div id="volume_center_wrapper" class="std-center-wrapper center_wrapper">
+    <div class="upper_region">
+        <div angrid="volumegridOptions">
+        </div>
+    </div>
+</div>
+
+
+<div class="actions">
+    <button class="btn btn-small btn-danger" ng-click="open_confirm_dialog2()"
+        ng-disabled="selectedVT.length==0">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Volume Types"|i18n}}
+    </button>
+    <button class="btn btn-small btn-primary" ng-click="create_vt()">
+        <i class="icon-white"></i>
+        {{"Create Volume Type"|i18n}}
+    </button>
+</div>
+
+<div id="volume_type_center_wrapper" class="std-center-wrapper center_wrapper">
+    <div class="upper_region">
+        <div angrid="volumeTypeGridOptions">
+        </div>
+    </div>
+</div>
+
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_volumes()" 
+    confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown2">
+    <confirm-dialog action="delete_volume_types()"
+    confirm-dialog-shown="confirm_dialog_shown2"></confirm-dialog>
+</div>
+
+<div ui-modal class="fade" ng-model="create_vt_shown">
+    <create-vt modal-shown="create_vt_shown"></create-vt>
+</div>

@@ -1,0 +1,40 @@
+.monitor_wrapper {
+    span.monitor_label_span {
+        width: 200px;
+    }
+}
+
+.metric{
+    margin-right: 10px;
+    .selected &{
+        color:#fff;
+    }
+}
+
+.small_chart_wrapper{
+    padding: 10px;
+    .small_chart_title_bar {
+        padding: 10px 10px 0 0;
+        background: #dcedf5;
+        border-radius: 5px 5px 0 0;
+        .chart_title {
+            display: inline;
+            padding-left: 5px;
+        }
+        select {
+            float: right;
+        }
+    }
+    .small_chart {
+        height: 250px;
+        width: 300px;
+        border-bottom: 1px solid #e9f1f4;
+        border-left: 1px solid #e9f1f4;
+        border-right: 1px solid #e9f1f4;
+        .jqplot-event-canvas {
+            z-index: 9999;
+            &:hover {
+            }
+        }
+    }
+}

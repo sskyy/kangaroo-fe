@@ -1,0 +1,57 @@
+<div class="overview_wrapper clearfix">
+    <!--<div class="row-fluid">                  -->
+    <!--    <div class="messages">               -->
+    <!--        <div class="alert alert-success">-->
+    <!--            {{"No Message"|i18n}}        -->
+    <!--        </div>                           -->
+    <!--    </div>                               -->
+
+    <!--</div>                                   -->
+    <div class="row-fluid">
+        <div class="instance_area span6">
+            <div class="panel">
+                <div class="panel-title">
+                    {{"My Instances"|i18n}}
+                </div>
+                <div class='panel-head'>
+                    <button ng-click="open_launch_instance()" class="btn-primary btn">
+                        {{"Launch Instance"|i18n}}
+                    </button>
+                </div>
+                <div class='panel-body'>
+                  <div class="node-area clearfix panel-async-content no-loading">
+                    <instancenode ng-repeat="instance in instances"
+                        status = "instance.abs_status"
+                        name="instance.name"
+                        flavor_name = "instance.flavor.name"
+                        uptime="instance.uptime"/>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quota_area span6">
+            <div class="resource_overview panel">
+                <div class="quota">
+                    <div class="panel-title">
+                        <span class="title">{{"My Resource"|i18n}}</span>
+                    </div>
+                    <div class="panel-head">
+                        <a class="btn btn-primary" target="_blank">{{"apply for more"|i18n}}</a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="body panel-async-content"><quotaitem ng-repeat="(name, quota) in quotas"
+                            resource-name="name"
+                            resource-raw-limit="quota.raw_limit"
+                            resource-raw-used="quota.raw_used">
+                            </quotaitem></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ui-modal id="launch_instance_popmodal" class="fade" ng-model="launch_instance_shown">
+    <launch-instance launch_instance_shown='launch_instance_shown'/>
+</div>

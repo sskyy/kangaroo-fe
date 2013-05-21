@@ -1,0 +1,39 @@
+@import "bootstrap/less/reset.less";
+@import "bootstrap/less/alerts.less";
+@import "bootstrap/less/variables.less";
+@import "bootstrap/less/mixins.less";
+@import "bootstrap/less/buttons.less";
+@import "bootstrap/less/forms.less";
+@import "bootstrap/less/scaffolding.less";
+
+.alert{
+  padding:0;
+}
+
+.login {
+  width: 400px;
+  background:url(../img/logo.png) no-repeat center top;
+  margin: 40px auto 0 auto;
+  padding-top: 255px;
+}
+
+.container {
+  width: 400px;
+  padding: 25px 25px 25px 25px;
+  position: relative;
+  border: 1px solid #D2DCE1;
+  .box-shadow(0 0 10px rgba(0,0,0,.2));
+
+  .modal-footer{
+    background-color: #fff;
+   }
+
+  .button_wrapper{
+    a {
+      text-decoration: none;
+    }
+    .btn + .btn {
+      margin-left: 60px;
+    }
+  }
+}

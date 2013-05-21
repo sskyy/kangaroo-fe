@@ -1,0 +1,21 @@
+<div class="notify_window" ng-init="display_full=false">
+    <div class="notify_normal" ng-show="display_full">
+        <div class="notify_title_bar">
+            <strong class="title">{{"message"|i18n}}</strong>
+            <a class="action toggle_minize" title='{{"min"|i18n}}'
+                ng-click="display_full=false">-</a>
+            <a class="action clear_msg" title='{{"clean msg"|i18n}}'
+                ng-click="msgs.clean()">~</a>
+        </div>
+        <div class="notify_msg_win">
+            <div ng-repeat="item in msgs.data">
+                <strong>{{item.date}}</strong>:
+                <span class="msg_wrapper {{item.level}}_msg">{{item.msg}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="notify_min" ng-hide="display_full">
+        <a class="action" ng-click="display_full=true">!</a>
+    </div>
+</div>

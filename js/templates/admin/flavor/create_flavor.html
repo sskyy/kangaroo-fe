@@ -1,0 +1,115 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <h3>{{"Create Flavor"|i18n}}</h3>
+    </div>
+    <form novalidate class="form-horizontal" name="flavor_form"
+        ng-submit="submit()">
+        <div class="modal-body">
+            <div class="control-group" ng-class="{'error': flavor_form.name.$invalid}">
+                <label class="control-label">{{"Name"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="name" ng-model="name"
+                    maxlength=25 required flavor-name-valid/>
+                    <span class="help-inline"
+                        ng-show="flavor_form.name.$error.required">{{"Name not null"|i18n}}</span>
+                    <span class="help-inline"
+                        ng-show="flavor_form.name.$error.flavor_name_valid">
+                        {{"Flavor name already existed."}}
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{'error': flavor_form.vcpu.$invalid}">
+                <label class="control-label">{{"VCPUs"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="vcpu" ng-model="vcpu" integer
+                    required/>
+                    <span class="help-inline"
+                        ng-show="flavor_form.vcpu.$error.integer">
+                        {{"Integer is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{'error': flavor_form.ram.$invalid}">
+                <label class="control-label">{{"RAM MB"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="ram" ng-model="ram" required
+                    integer/>
+                    <span class="help-inline"
+                        ng-show="flavor_form.ram.$error.integer">
+                        {{"Integer is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{'error': flavor_form.disk.$invalid}">
+                <label class="control-label">{{"Disk GB"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="disk" ng-model="disk" required
+                    integer/>
+                    <span class="help-inline"
+                        ng-show="flavor_form.disk.$error.integer">
+                        {{"Integer is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{'error':flavor_form.ephemeral.$invalid}">
+                <label class="control-label">{{"Ephemeral GB"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="ephemeral" ng-model="ephemeral"
+                     required integer/>
+                    <span class="help-inline"
+                        ng-show="flavor_form.ephemeral.$error.integer">
+                        {{"Integer is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{'error':flavor_form.swap.$invalid}">
+                <label class="control-label">{{"Swap MB"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="swap" ng-model="swap" required
+                    integer/>
+                    <span class="help-inline"
+                        ng-show="flavor_form.swap.$error.integer">
+                        {{"Integer is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+            <div ng-show="is_dough_enabled()" class="control-group" ng-class="{'error':flavor_form.hourly.$invalid}">
+                <label class="control-label">{{"Hourly Price"|i18n}} {{"yuan"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="hourly" ng-model="hourly" required
+                    />
+                    <span class="help-inline"
+                        ng-show="flavor_form.hourly.$error.integer">
+                        {{"this field is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+            <div ng-show="is_dough_enabled()" class="control-group" ng-class="{'error':flavor_form.monthly.$invalid}">
+                <label class="control-label">{{"Monthly Price"|i18n}} {{"yuan"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="monthly" ng-model="monthly" required
+                    />
+                    <span class="help-inline"
+                        ng-show="flavor_form.monthly.$error.integer">
+                        {{"this field is required"|i18n}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{"Description"|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>{{"You can define new flavor here."}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+			<input class="btn btn-primary pull-right"
+            type="submit" value="{{'Create'|i18n}}"/>
+			<a class="btn" ng-click="close_modal()">{{'Cancel'|i18n}}</a>
+        </div>
+    </form>
+</div>

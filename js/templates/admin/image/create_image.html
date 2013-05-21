@@ -1,0 +1,40 @@
+<div>
+    <modal-header title="Create Image"></modal-header>
+
+    <form method="POST" action="/resource/image/list" enctype="multipart/form-data" class="form-horizontal" name="create_image_form" ng-upload>
+        <div class="modal-body clearfix">
+            <b-input required=false name="csrfmiddlewaretoken" value="csrf_token" type="hidden"></b-input>
+            <b-input name="name" label="Name" model="name"></b-input>
+            <b-input name="copy_from" placeholder="http://example.com/image.iso"
+                label="Find Image" model="copy_from" required=false></b-input>
+            <b-input name="image_file" label="Image File" type="file" model="image_file" required=false></b-input>
+
+            <div class="control-group">
+                <label class="control-label">{{"Format"|i18n}}</label>
+                <div class="controls">
+                    <select name="disk_format" ng-model="disk_format">
+                        <option value="{{format.id}}" ng-repeat="format in image_formats">
+                            {{format.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <b-input name="min_disk" label="Min disk(GB)" model="min_disk" required=false></b-input>
+            <b-input name="min_ram" label="Min ram(MB)" model="max_disk" required=false></b-input>
+
+            <div class="control-group">
+                <label class="control-label">{{"Public"|i18n}}</label>
+                <div class="controls">
+                    <input type="checkbox" name="is_public"
+                    value="true" />
+                </div>
+            </div>
+
+            <modal-desc desc=" Specify an image to upload to the Image Service.
+
+Currently only images available via an HTTP URL are supported. The image location must be accessible to the Image Service. Compressed image binaries are supported (.zip and .tar.gz.) "></modal-desc>
+        </div>
+        <modal-footer complete-upload="complete_upload" form_invalid="form_invalid"></modal-footer>
+    </form>
+</div>

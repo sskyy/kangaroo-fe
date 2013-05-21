@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-header">
+		<a class="close" ng-click="closeModal()">x</a>
+        <h3>{{"Allocate IP"|i18n}}</h3>
+    </div>
+	<form novalidate class="form-horizontal" name="allocate_ip_form"
+	ng-submit="submit_allocate_ip()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{'Pool'|i18n}}</label>
+                <div class="controls">
+                    <select ng-model="ip_pool" 
+                        ng-options="pool.name for pool in pool_list">
+                    </select>
+                </div>
+            </div>   
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{'Description'|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>
+                    从所选的IP地址池申请公网IP
+                    </p>
+                </div>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <a class="btn" ng-click="closeModal()">{{'Cancel'|i18n}}</a>
+        <input class="btn btn-primary"
+        type="submit" value='{{"Allocate IP"|i18n}}'/>
+        
+    </div>
+    </form>
+</div>

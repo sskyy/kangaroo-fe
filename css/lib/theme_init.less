@@ -1,0 +1,236 @@
+// reset twitter bootstrap's css 整体框架布局和通用样式
+
+// variables
+
+  @primaryColor: #59cfed;   //主色调
+
+  // Header
+  @navbarBorderWidth: 3px;  
+  @customNavbarHeight: 56px;
+
+  // sideBar
+  @sideBarTop: @customNavbarHeight + @navbarBorderWidth;
+  @sideBarWidth: 180px;
+
+  // mainContent
+  @panelCenterPadding: 20px;  
+  @mainContentTop: @sideBarTop + @panelCenterPadding;  
+  
+  // Footer
+
+// mixins  当页的 mixin 写在当页的顶部
+
+  .status-icon (@url, @pos_x: 50%, @pos_y: 50%, @size: 25px, @height: 30px, @width: 30px) {
+    background-image: url(@url);
+    background-position: @pos_x @pos_y;
+    background-size: @size;
+    background-repeat: no-repeat;
+    height: @height;
+    width: @width;
+    display: inline-block;
+  }
+
+// --------------------------------------------------
+
+html, 
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x:hidden;
+}
+
+.clear {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+#main-content {
+  min-width: 900px;
+  background: url(/static/img/main-content-bg.png) repeat left top scroll;
+  padding-top: @mainContentTop;
+  right: 0;
+  padding-bottom: 36px;
+  left: 0;
+
+  #sidebar {
+    float: left;
+    position: fixed;
+    width: @sideBarWidth;
+    left: 0px;
+    top: @sideBarTop;
+    bottom: 0px;
+    overflow-y:auto;
+    font-size: 14px;
+    background-color: @white;
+    z-index: 90;
+    .box-shadow(2px 0px 3px #ddd);
+  }
+
+  #panel-center-wrapper {
+
+    margin-left: @sideBarWidth + @panelCenterPadding;
+    margin-right: @panelCenterPadding;
+    padding-bottom: @panelCenterPadding;
+    position: relative;
+    .page-loader {
+      width: 70px;
+      height: 20px;
+      background: #fcf8e3;
+      position: absolute;
+      z-index: 999;
+      top: -3px;
+      left: 50%;
+      padding: 5px;
+      text-align: center;
+      border-radius: 2px;
+      border: 1px solid #fbeed5;
+      font-weight: bold;
+      color: #c09853;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .center_wrapper, .overview_wrapper{
+      background-color: #FFF;
+    }
+  }
+
+  &:after{
+    .clear
+  }
+}
+
+.grid {
+    height: 300px;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  padding: 10px;
+  background-color: #fff;
+  .opacity(80);
+  z-index:80;
+  p{
+    color: #777;
+    font-size: smaller;
+    text-align: center;
+  }
+}
+
+.dropdown-btn-disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+// status-icon
+
+  .status-icon-active {
+    .status-icon('/static/img/status_icon/active.png', 50%, 30%);
+  }
+
+  .status-icon-building {
+    .status-icon('/static/img/status_icon/building.gif', @size: 20px);
+  }
+
+  .status-icon-error {
+    .status-icon('/static/img/status_icon/error.png');
+  }
+
+  .status-icon-sleeping {
+    .status-icon('/static/img/status_icon/sleeping.png');
+  }
+
+  .status-icon-transition {
+    .status-icon('/static/img/status_icon/transition.gif', @size: 20px);
+  } 
+
+  .status-icon-deleting {
+    .status-icon('/static/img/status_icon/deleting.gif', @size: 20px);
+  }
+
+  .os-icon-ubuntu {
+    .status-icon('/static/img/os_icon/ubuntu.png', @size: 60px, @width: 50px);
+  }
+
+  .os-icon-windows {
+    .status-icon('/static/img/os_icon/windows.png', @size: 20px);
+  }
+  .os-icon-centos {
+    .status-icon('/static/img/os_icon/centos.png', @size: 50px, @width: 50px);
+  }
+  .os-icon-mac {
+    .status-icon('/static/img/os_icon/mac.png');
+  }
+  .os-icon-redflag {
+    .status-icon('/static/img/os_icon/redflag.png');
+  }
+  .os-icon-redhat {
+    .status-icon('/static/img/os_icon/redhat.png', @size: 55px, @width: 50px);
+  }
+
+// buttons 暂且这么放置
+
+  .actions .btn {
+    .btn-small;
+  }
+
+  .btn-create {
+    .btn-primary;
+  }
+  
+  .btn-connect {
+
+  }
+
+  .btn-edit {
+
+  }
+
+  .btn-delete {
+    .btn-danger;
+  }
+
+  .btn-update {
+
+  }
+
+  .btn-import { //keypair
+
+  }
+
+  .btn-create .icon-icon {
+    .icon-plus-sign;
+    .icon-white;
+  }
+
+  .btn-connect .icon-icon {
+    .icon-connect;
+  }
+
+  .btn-delete .icon-icon {
+    .icon-trash;
+    .icon-white;
+  }
+
+  .btn-edit .icon-icon {
+    .icon-edit;
+  }
+
+  .btn-update .icon-icon {
+    .icon-edit;
+  }
+
+  .btn-create-snapshot {
+    .icon-edit;
+  }
+
+  .btn-create-snapshot {
+    .icon-edit;
+  }

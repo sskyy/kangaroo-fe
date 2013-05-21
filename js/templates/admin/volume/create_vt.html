@@ -1,0 +1,13 @@
+<div>
+    <modal-header title="Create Volume Type"></modal-header>
+
+    <form novalidate class="form-horizontal" name="create_vt_form"
+        ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <b-input label="Name" model="name" validate="['vt-exist']"></b-input>
+            <modal-desc desc="The volume type defines the characteristics of a volume. It usually maps to a set of capabilities of the storage back-end driver to be used for this volume. Examples: 'Performance', 'SSD', 'Backup', etc."></modal-desc>
+        </div>
+
+        <modal-footer></modal-footer>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+<h4 style="margin-top:0">{{"Account Balance"|i18n}}</h4>
+<div id="balance_account_balance"> <!-- delete => class="style-well-bg" -->
+    <table>
+        <tbody>
+            <tr>
+                <td>{{'Account Balance'|i18n}}</td>
+                <td>{{crash_remaining}}RMB </td>
+                <td><button disabled tabindex="1" class="btn btn-mini btn-primary" >
+                    {{'Deposit'|i18n}}
+                </button></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>{{'Coupon Balance'|i18n}}</td>
+                <td id="coupon_text">{{coupon_remaining}}RMB </td>
+                <td><button tabindex="1" class="btn btn-mini btn-primary"
+                        ng-click="open_load_coupon()">
+                    {{'Load Coupon'|i18n}}
+                </button></td>
+                <td>
+                    <a disabled href="#" class="btn btn-mini">
+                        {{'Apply for Coupon'|i18n}}
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="actions">
+    <h4 class="pull-left">{{"Coupon History"|i18n}}</h4>
+
+    <select class="input-small pull-right"
+        ng-model="selected_year"
+        ng-options="year for year in select_years"></select>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="balance_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions"></div>
+    </div>
+</div>
+
+<div class="fade" ui-modal ng-model="load_coupon_shown">
+    <load-coupon-modal modal-shown="load_coupon_shown"></load-coupon-modal>
+</div>

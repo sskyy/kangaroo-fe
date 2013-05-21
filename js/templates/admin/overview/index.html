@@ -1,0 +1,52 @@
+<div class="actions">
+    <div class="btn-group">
+        <button class="btn {{(gridOptions.angridStyle != 'th') || 'active'}}"
+            ng-click="gridOptions.angridStyle='th'"><i
+                class="icon-th"></i>{{"Box"|i18n}}</button>
+        <button class="btn {{(gridOptions.angridStyle != 'th-list') ||
+            'active'}}"  ng-click="gridOptions.angridStyle='th-list'"><i
+                class="icon-th-list"></i>{{"Grid"|i18n}}</button>
+    </div>
+</div>
+
+<div class="center_wrapper std-center-wrapper activable">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+    <div></div>
+
+    <div class="buttom_region">
+        <div class="tabbable">
+            <div class="tab-pane" title="{{'Workload'|i18n}}">
+                <div class="node_panel_title">
+                    <span class="node_host_name">
+                        <h3>
+                    {{'Host name'|i18n}}:{{selectedItems[0].hostname}}
+                        </h3>
+                    </span>
+                    <span class="node_host_list">
+                    
+                    </span>
+                </div>
+                <usage-pie-chart chart-id='cpu_usage' chart-title="CPU Usage"></usage-pie-chart>
+                <usage-pie-chart chart-id='mem_usage' chart-title="Mem Usage"></usage-pie-chart>
+                <usage-pie-chart chart-id="disk_usage" chart-title="Disk Usage"></usage-pie-chart>
+            </div>
+            <div class="tab-pane" title="{{'instances'|i18n}}">
+
+                <div class="node_panel_title">
+                    <span class="node_host_name">
+                        <h3>
+                    {{'Host name'|i18n}}:{{selectedItems[0].hostname}}
+                        </h3>
+                    </span>
+                    <span class="node_host_list">
+                                           
+                    </span>
+                </div>
+                <vm-node ng-repeat="vm in vm_list"></vm-node>
+            </div>
+        </div>
+    </div>
+</div>

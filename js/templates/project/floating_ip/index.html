@@ -1,0 +1,46 @@
+<div class="actions">
+    <button class="btn btn-create" ng-click="open_allocate_ip()">
+        <i class="icon-icon"></i>
+        {{"Allocate IP"|i18n}}
+    </button>
+    <button class="btn btn-delete"
+        ng-click="open_confirm_dialog()"
+        ng-disabled="selectedItems.length==0">
+        <i class="icon-icon"></i>
+        {{"Release IP"|i18n}}
+    </button>
+    <button class="btn btn-associate-ip "
+        ng-click="open_associate_ip()"
+        ng-disabled="selectedItems.length==0">{{"Associate IP"|i18n}}</button>
+    <button class="btn btn-remove-associate"
+        ng-click="open_disassociate_ip()"
+        ng-disabled="selectedItems.length==0">{{"Disassociate IP"|i18n}}</button>
+</div>
+
+<div id="floatip_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+
+<div ui-modal id="allocate_ip_popmodal" class="fade" ng-model="allocate_ip_shown">
+    <allocate-ip allocate_ip_shown="allocate_ip_shown"></allocate-ip>
+</div>
+
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="release_ip()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>
+
+<div ui-modal class="fade" ng-model="associate_ip_shown">
+    <associate-ip associate-ip-shown="associate_ip_shown"></associate-ip>
+</div>
+
+<div ui-modal class="fade" ng-model="disassociate_ip_shown">
+    <confirm-dialog action="disassociate_ip()"
+    title="Disassociate IP"
+    msg="Confirm to disassociate ip from the instance"
+    confirm-dialog-shown="disassociate_ip_shown"></confirm-dialog>
+</div>

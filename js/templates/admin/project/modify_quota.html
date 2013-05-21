@@ -1,0 +1,72 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <h3>{{"Modify Quota"|i18n}}</h3>
+    </div>
+    <form novalidate class="form-horizontal" name="modify_quota_form"
+        ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{'Metadata Items'|i18n}}</label>
+                <div class="controls"><input type="text" name='metadata_items' 
+                    ng-model="metadata_items"/></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{'VCPUS'|i18n}}</label>
+                <div class="controls">
+                    <input type="text" name="cores" ng-model="cores"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{"Instances"|i18n}}</label>
+                <div class="controls"><input type="text" name="instances"
+                    ng-model='instances'/></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{"Inject Files"|i18n}}</label>
+                <div class="controls"><input type="text" name="injected_files"
+                    ng-model="injected_files"/></div>
+            </div>
+            <div class="control-group">
+                <label  class="control-label">{{"Injected File Content
+                    Bytes"|i18n}}</label>
+                <div class="controls"><input type="text"
+                    name="injected_file_content_bytes"
+                    ng-model="injected_file_content_bytes"/></div>
+            </div>
+            <div class="control-group">
+                <label  class="control-label">{{"Volumes"|i18n}}</label>
+                <div class="controls"><input type="text" name="volumes"
+                    ng-model="volumes"/></div>
+            </div>
+            <div class="control-group">
+                <label  class="control-label">{{"Gigabytes"|i18n}}</label>
+                <div class="controls"><input type="text" name="gigabytes"
+                    ng-model="gigabytes"/></div>
+            </div>
+            <div class="control-group">
+                <label  class="control-label">{{"RAM(MB)"|i18n}}</label>
+                <div class="controls"><input type="text" name="ram"
+                    ng-model="ram"/></div>
+            </div>
+            <div class="control-group">
+                <label  class="control-label">{{"Floating IPs"|i18n}}</label>
+                <div class="controls"><input type="text" name="floating_ips"
+                    ng-model="floating_ips"/></div>
+            </div>
+            <div class="style-quota">
+                <div class="head"><span class="title">{{"Description"|i18n}}</span></div>
+                <div class="body">
+                    <p>From here you can set quotas (max limits) for the project.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary pull-right"
+            value="{{'Submit'|i18n}}"/>
+            <a class="btn cancel"
+                ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+        </div>
+    </form>
+</div>

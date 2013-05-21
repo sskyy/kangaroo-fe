@@ -1,0 +1,101 @@
+<div class="actions">
+    <button class="btn btn-primary btn-small"
+        ng-click="open_create_user()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create User"|i18n}}
+    </button>
+    <button class="btn btn-small btn-danger"
+        ng-disabled="selectedItems.length==0"
+        ng-click="open_confirm_dialog()">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Users"|i18n}}
+    </button>
+    <button class="btn btn-small"
+        ng-disabled="selectedItems.length!=1"
+        ng-click="open_edit_user()">
+        <i class="icon-edit"></i>
+        {{"Edit User"|i18n}}
+    </button>
+</div>
+<div id='instance_center_wrapper' class="center_wrapper std-center-wrapper"
+    >
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+    <div></div>
+    <!--
+    <div class="buttom_region">
+        <div class="tabbable">
+            <div class="tab-pane" title="{{'Detail'|i18n}}">
+                <table class="table table-hover table-condensed">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" title="{{'Project'|i18n}}">
+                <table class="table table-hover table-condensed">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" title="{{'Instances'|i18n}}">
+                <table class="table table-hover table-condensed">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" title="{{'Balance'|i18n}}">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>{{'Account Balance'|i18n}}</td>
+                            <td>8888.00RMB</td>
+                        </tr>
+                        <tr>
+                            <td>{{'Coupon Balance'|i18n}}</td>
+                            <td>87932.34RMB</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" title="{{'Billing'|i18n}}">
+            </div>
+            <div class="tab-pane" title="{{'Quota'|i18n}}">
+                <div class="row-fluid">
+                    <div class="span5 offset1">
+                        <quotaitem ng-repeat="(name, quota) in viewQuotas.left"
+                        resource-name="name"
+                        resource-raw-limit="quota.raw_limit"
+                        resource-raw-used="quota.raw_used">
+                        </quotaitem>
+                    </div>
+                    <div class="span5 offset1">
+                        <quotaitem ng-repeat="(name, quota) in viewQuotas.right"
+                        resource-name="name"
+                        resource-raw-limit="quota.raw_limit"
+                        resource-raw-used="quota.raw_used">
+                        </quotaitem>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+</div>
+
+<div class="fade" ui-modal ng-model="create_user_shown">
+    <create-user-modal modal-shown="create_user_shown" is-edit="is_edit"></create-user-modal>
+</div>
+<div class="fade" ui-modal ng-model="confirm_dialog_shown">
+    <confirm-dialog confirm-dialog-shown="confirm_dialog_shown" action="delete_users()"></confirm-dialog>
+</div>
+<!-- div class="fade" ui-modal ng-model="edit_user_shown">
+    <edit-user-modal modal-shown="edit_user_shown"></edit-user-modal>
+</div> -->

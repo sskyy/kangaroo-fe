@@ -1,0 +1,31 @@
+<div class="actions">
+    <button class="btn btn-small btn-primary" ng-click="open_create_loadbalaner_modal()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create LB"|i18n}}
+    </button>
+    <button class="btn btn-small"
+        ng-disabled="selectedItems.length!=1" ng-click="open_edit_loadbalaner_modal()">
+        <i class="icon-edit"></i>
+        {{"Edit LB"|i18n}}
+    </button>
+    <button class="btn btn-small btn-danger"
+        ng-disabled="selectedItems.length==0" ng-click="open_confirm_dialog()">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete LB"|i18n}}
+    </button>
+</div>
+
+<div id="lb_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+<div id="load_balancer_popmodal" ui-modal class="fade" ng-model="load_balancer_modal_shown">
+    <loadbalancermodal modal-shown="load_balancer_modal_shown" edit-load-balancer="edit_load_balancer" ></loadbalancermodal>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_loadbalancer()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>

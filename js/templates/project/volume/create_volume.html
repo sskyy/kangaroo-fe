@@ -1,0 +1,22 @@
+<div>
+    <modal-header title="Create Volume"></modal-header>
+
+    <form novalidate class="form-horizontal" name="create_volume_form"
+        ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <b-input label="Name" model="name"></b-input>
+            <b-input required=false label="Description" model="description"></b-input>
+            <b-select label="Type" model="volume_type" options="volume_types"></b-select>
+            <b-input label="Size(GB)" model="size" validate=["integer"]></b-input>
+            <div ng-show="_createFromSnapshot">
+                <b-select label="Snapshot as source" model="snapshot_id" options="volume_snapshots">
+                </b-select>
+            </div>
+
+            <modal-desc desc="{{'Volumes are block devices that can be attached to instances.'|i18n}}"></modal-desc>
+        </div>
+
+        <modal-footer form_invalid="form_invalid"></modal-footer>
+    </form>
+
+</div>

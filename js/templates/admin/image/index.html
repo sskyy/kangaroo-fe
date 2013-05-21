@@ -1,0 +1,81 @@
+<div class="actions">
+    <button class="btn btn-small btn-primary"
+        ng-click="open_create_image()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create Image"|i18n}}
+    </button>
+    <button class="btn btn-small btn-danger"
+        ng-click="open_confirm_dialog()"
+        ng-disabled="selectedItems.length==0">
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Images"|i18n}}
+    </button>
+</div>
+
+<div id='image_center_wrapper' class="center_wrapper std-center-wrapper activable"
+    ng-class="{'active': selectedItems.length==1}">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+    <div></div>
+    <div class="buttom_region" >
+
+        <div class="tabbable">
+            <div class="tab-pane" title="{{'Detail'|i18n}}">
+                <table class="table detail table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="title">{{"Name" | i18n}}</th>
+                            <th>{{displayItem.name}}</th>
+                        </tr>  
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="title">{{ "ID" | i18n }}</td>
+                            <td class="content">{{displayItem.id}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Status" | i18n }}</td>
+                            <td class="content">
+                                <icon region="status" key="{{displayItem.status}}" ></icon>
+                                {{displayItem.status}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Public" | i18n }}</td>
+                            <td class="content">{{displayItem.is_public}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Checksum" | i18n }}</td>
+                            <td class="content">{{displayItem.checksum}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Created" | i18n }}</td>
+                            <td class="content">{{displayItem.created_at}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Updated"|i18n}}</td>
+                            <td class="content">{{displayItem.updated_at}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Size"|i18n}}</td>
+                            <td class="content">{{displayItem.size}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Container Format"|i18n}}</td>
+                            <td class="content">{{displayItem.container_format}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Disk Format"|i18n}}</td>
+                            <td class="content">{{displayItem.disk_format}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fade" ui-modal ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_images()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>
+
+<div class="fade" ui-modal ng-model="create_image_shown">
+    <create-image modal-shown="create_image_shown"></create-image>
+</div>

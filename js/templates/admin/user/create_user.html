@@ -1,0 +1,103 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <div ng-switch on="isEdit">
+            <h3 ng-switch-when="false">{{"Create User"|i18n}}</h3>
+            <h3 ng-switch-when="true">{{"Edit User"|i18n}}</h3>
+        </div>
+    </div>
+    <form novalidate class="form-horizontal" id="create_user_form" name="create_user_form" ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group"
+                ng-class="{error: create_user_form.name.$invalid}">
+                <label class="control-label">{{"Name"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" id="input_name" ng-model="name" name="name" required name-valid      length-limit-valid length-min="3" />
+                    <span class="help-inline" 
+                        ng-show="create_user_form.name.$error.too_short">
+                    最小长度3位</span>
+                    <span class="help-inline" 
+                        ng-show="create_user_form.name.$error.required">
+                    请输入Username</span>
+                    <span class="help-inline" 
+                        ng-show="create_user_form.name.$error.repeated">
+                    重复的Username</span>
+                </div>
+            </div>
+
+            <div class="control-group"
+                ng-class="{error: create_user_form.email.$invalid}">
+                <label class="control-label">{{"Email"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" ng-model="email" name="email"
+                    required email-format-valid/>
+                    <span class="help-inline" 
+                        ng-show="create_user_form.email.$error.required">
+                    请输入Email</span>
+                    <span class="help-inline" 
+                        ng-show="create_user_form.email.$error.email_format_valid">
+                    Email格式不正确</span>
+                </div>
+            </div>
+
+            <div class="control-group"
+                ng-class="{error: create_user_form.password.$invalid
+                                ||create_user_form.confirm_password.$invalid}">
+                <label class="control-label">{{"Password"|i18n}}</label>
+                <div class="controls">
+                    <input type="password" id="password" ng-model="password" name="password"
+                     required length-limit-valid length-min="6" />
+                    <span class="help-inline" 
+                        ng-show="create_user_form.password.$error.required">
+                    请输入Password</span>
+                    <span class="help-inline" 
+                        ng-show="create_user_form.password.$error.too_short">
+                    最小长度6位</span>
+                </div>
+            </div>
+
+            <div class="control-group"
+                ng-class="{error: create_user_form.password.$invalid
+                                ||create_user_form.confirm_password.$invalid}">
+                <label class="control-label">{{"Confirm Password"|i18n}}</label>
+                <div class="controls">
+                    <input type="password" ng-model="confirm_password"
+                        name="confirm_password" same-as-valid same-as="#password"/>
+                    <span class="help-inline" 
+                        ng-show="create_user_form.confirm_password.$error.same_as_valid">
+                    输入不一致</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">{{"Main Project"|i18n}}</label>
+                <div class="controls">
+                    <select name="project" ng-model="project_uuid" required
+                        ng-options="project.id as project.name for project in project_list"></select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">{{"Enabled"|i18n}}</label>
+                <div class="controls">
+                    <input type="checkbox" ng-model="enabled" name="enabled"/>
+                </div>
+            </div>
+
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{"Description"|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>{{"From here you can create a new user and assign them to a project."|i18n}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary pull-right"
+            value="{{'Submit'|i18n}}" ng-disabled="create_user_form.$invalid"/>
+            <a class="btn cancel" ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+        </div>
+    </form>
+</div>

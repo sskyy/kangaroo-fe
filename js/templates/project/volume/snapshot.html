@@ -1,0 +1,26 @@
+<div class="actions">
+    <button class="btn btn-create" ng-click="open_create_volume_modal()"
+        ng-disabled="selectedItems.length!=1">
+        <i class="icon-icon"></i>
+        {{"Create Volume From Snapshot"|i18n}}
+    </button>
+    <button class="btn btn-delete"
+        ng-disabled="selectedItems.length==0" ng-click="open_confirm_dialog()">
+        <i class="icon-icon"></i>
+        {{"Delete Volume Snapshot"|i18n}}
+    </button>
+</div>
+
+<div class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions"></div>
+    </div>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_volume_snapshots()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>
+
+<div ui-modal class="fade" ng-model="create_volume_shown">
+    <create-volume modal-shown="create_volume_shown" create_from_snapshot="true"></create-volume>
+</div>

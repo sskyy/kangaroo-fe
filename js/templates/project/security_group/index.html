@@ -1,0 +1,31 @@
+<div class="actions">
+    <button class="btn btn-create" ng-click="open_create_sg_modal()">
+    	<i class="icon-icon"></i>
+    	{{"Create Security Group"|i18n}}
+    </button>
+    <button class="btn btn-update" ng-click="open_update_sg_modal()"
+        ng-disabled="selectedItems.length!=1">
+    	<i class="icon-icon"></i>
+    	{{"Update Security Group"|i18n}}
+    </button>
+    <button class="btn btn-delete" ng-click="open_confirm_dialog()"
+        ng-disabled="selectedItems.length==0">
+    	<i class="icon-icon"></i>
+    	{{"Delete"|i18n}}
+    </button>
+</div>
+<div id="sg_center_wrapper" class="center_wrapper std-center-wrapper">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+</div>
+
+<div id="security_group_add_popmodal" ui-modal class="fade" ng-model="sg_modal_shown">
+    <sg modal-shown="sg_modal_shown" update-sg="update_sg"></sg>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_group()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>
+

@@ -1,0 +1,43 @@
+.chart{
+	position: relative;
+	.arrow{
+		display: none;
+		z-index: 1000;
+
+		position: absolute;
+		top: 28px;
+		bottom: 30px;
+		width: 30px;
+		cursor: pointer;
+		overflow: hidden;
+		i{
+			position: absolute;
+			top:50%;
+			margin-top:-6px;
+			margin-left:1000px;
+		}
+	}
+	.arrow:hover{
+		background-color: rgba(150,150,150,0.3) !important;
+		i{
+			margin-left:10px !important;
+		}
+	}
+	.arrow_left{
+		left: 28px;
+	}
+	.arrow_right{
+		left: 28px;
+	}
+	.jqplot-target{
+		.jqplot-axis{
+			overflow: hidden;
+		}
+	}
+}
+.chart:hover{
+	.arrow{
+		display: block;
+		background-color: rgba(150,150,150,0.1);
+	}
+}

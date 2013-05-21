@@ -1,0 +1,201 @@
+//overview
+
+@nodeSelectedBorderColor: darken(#FFFFD7, 40%);
+@nodeWidth: 40px;
+@nodeLargeWidth: 100px;
+@nodeSmallWidth: 20px;
+@nodeInnerMargin: 0px;
+@nodeLargeInnerMargin: 0px;
+@nodeSmallInnerMargin: 0px;
+@nodeInnerWidth: 0px;
+@nodeLargeInnerWidth: @nodeLargeWidth - @nodeLargeInnerMargin * 2;
+@nodeSmallInnerWidth: @nodeSmallWidth - @nodeSmallInnerMargin * 2;
+@nodeGreen: #E2EFDB;
+@nodeGreenDeep: #3C782E;
+@nodeYellow: #FCF8E6;
+@nodeYellowDeep: B08836;
+@nodeRed: #F0DFDF;
+@nodeRedDeep: #A53736;
+@nodeBlue: #DCEDF5;
+@nodeBlueDeep: #3372A1;
+@nodeSmallGreen: #62C462;
+@nodeSmallGreenDeep: #3C782E;
+@nodeGrayDeep: #999;
+@nodeGray: lighten(@nodeGrayDeep, 30%);
+
+.quota{
+    .style-quota;
+}
+
+.quota_title {
+    .text {cursor: default; text-decoration: none; color: #333;}
+    .title {text-decoration: none}
+    .limit { margin-bottom: 0; color:#999; float: right; }
+}
+
+.nodeInner(@innerMargin, @innerWidth) { // function
+    .node-inner {
+        margin: @innerMargin;
+        width: @innerWidth;
+        height: @innerWidth;
+        span.content {
+            width: @innerWidth;
+            height: @innerWidth;
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            p {margin:0}
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            padding-left: 10px;
+            word-break: break-all;
+        }
+    }
+}
+.node {
+    cursor: pointer;
+    float: left;
+    .border-radius(5px);
+    margin: 0 5px 5px 0;
+    .nodeInner(@nodeInnerMargin, @nodeInnerWidth);
+    transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    &.large {
+        width: @nodeLargeWidth;
+        height: @nodeLargeWidth;
+        margin: 0 10px 10px 0;
+        .nodeInner(@nodeLargeInnerMargin, @nodeLargeInnerWidth);
+        .node-inner span.content p {
+            height: @nodeLargeInnerWidth / 3;
+            overflow: hidden;
+            margin: 0;
+            line-height: @nodeLargeInnerWidth / 3
+        }
+    }
+    &.small {
+        width: @nodeSmallWidth;
+        height: @nodeSmallWidth;
+        margin: 0 3px 3px 0;
+        .nodeInner(@nodeSmallInnerMargin, @nodeSmallInnerWidth);
+    }
+}
+
+.node.ui-animate {
+    opacity: 0;
+}
+
+.node-inner {
+    .border-radius(5px);
+    background-color: @nodeGreen;
+    color: @nodeGreenDeep;
+}
+
+.small .node-inner {
+    background-color: @nodeSmallGreen;
+    &:hover { background-color: @nodeSmallGreenDeep;}
+}
+
+.node-inner {
+    &:hover { color: @white; background-color: @nodeGreenDeep; }
+    &.gray {
+        color: #000;
+        background-color: @nodeGray;
+        &:hover { color: #000; background-color: @nodeGrayDeep; }
+    }
+    &.yellow {
+        color: @nodeYellowDeep;
+        background-color: @nodeYellow;
+        &:hover { color:@white; background-color: @nodeYellowDeep; }
+    }
+    &.red {
+        color: @nodeRedDeep;
+        background-color: @nodeRed;
+        &:hover { color:@white; background-color: @nodeRedDeep; }
+    }
+    &.blue {
+        color: @nodeBlueDeep;
+        background-color: @nodeBlue;
+        &:hover { color:@white; background-color: @nodeBlueDeep; }
+    }
+    &.launch {
+        border: 1px @black dashed;
+        background: none;
+        color: #999;
+        h1 { font-size: 45px; font-weight: normal; }
+        q { font-size:18px; }
+        div + div { display: none; }
+        &:hover {
+            border: none;
+            color: #fff;
+            background-color:#149BDF;
+            div { display:none; }
+            div + div { display: block; }
+        }
+    }
+}
+
+
+.node.selected {
+    background-color: @nodeSelectedBorderColor;
+    .node-inner {
+        background-color: @nodeGreenDeep;
+        color: @white;
+        &.gray { color: #000; background-color: @nodeGrayDeep }
+        &.yellow { background-color: @nodeYellowDeep; }
+        &.red { background-color: @nodeRedDeep; }
+        &.blue { background-color: @nodeBlueDeep;}
+    }
+}
+
+.main_launch {
+    position: relative;
+    transition: all .3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+}
+.main_launch:active:after {
+  content: "";
+  display:block;
+  width: 2px;
+  height: 2px;
+  position:absolute;
+  border-radius:2px;
+  top:50%;
+  left: 50%;
+  margin: -1px 0 0 -1px;
+  z-index:2;
+  background: rgba(255,255,255,1);
+  box-shadow:0 0 10px 35px rgba(255,255,255,0.5),
+    0 0 20px 40px rgba(255,255,255,0.5),
+    0 0 30px 45px rgba(255,255,255,0.4),
+    0 0 40px 50px rgba(255,255,255,0.3),
+    0 0 50px 55px rgba(255,255,255,0.3),
+    0 0 60px 60px rgba(255,255,255,0.3),
+    0 0 70px 65px rgba(255,255,255,0.3);
+}
+.panel{
+    margin:0 10px;
+    padding : 5px 10px;
+    .panel-title{
+        margin-bottom:5px;
+        border-bottom: 1px #eee solid;
+        padding: 2px 0px;
+    }
+    .panel-head{
+        margin-bottom:4px;
+    }
+    .panel-body{
+        .panel-async-content:empty{
+            min-height:40px;
+            margin:20px 0;
+            background:url('/static/img/spinner-large.gif') no-repeat center center;
+        }
+        .panel-async-content.no-loading:empty{
+            background:none;
+        }
+
+
+    }
+}

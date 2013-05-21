@@ -1,0 +1,121 @@
+<div class="actions">
+    <button class="btn btn-primary btn-small"
+        ng-click="open_create_project()">
+        <i class="icon-white icon-plus-sign"></i>
+        {{"Create Project"|i18n}}
+    </button>
+    <button class="btn btn-small btn-danger"
+        ng-disabled="selectedItems.length==0"
+        ng-click="open_confirm_dialog()"
+        >
+        <i class="icon-white icon-trash"></i>
+        {{"Delete Projects"|i18n}}
+    </button>
+    <button class="btn btn-small"
+        ng-click="open_edit_project()"
+        ng-disabled="selectedItems.length!=1">
+        <i class="icon-edit"></i>
+        {{"Edit Project"|i18n}}
+    </button>
+    <button class="btn btn-small"
+        ng-click="open_manage_user()"
+        ng-disabled="selectedItems.length!=1">
+        <i class="icon-user"></i>
+        {{"Manage User"|i18n}}
+    </button>
+    <button class="btn btn-small"
+        ng-click="open_modify_quota()"
+        ng-disabled="selectedItems.length!=1">
+        {{"Modify Quota"|i18n}}
+    </button>
+</div>
+<div id='instance_center_wrapper' class="center_wrapper std-center-wrapper activable">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+    <div></div>
+    <div class="buttom_region">
+        <div class="tabbable">
+            <div class="tab-pane" title="{{'Users'|i18n}}">
+                <div class="std-center-wrapper">
+                    <div angrid="usersGridOptions"></div>
+                </div>
+            </div>
+            <div class="tab-pane" title="{{'Instances'|i18n}}">
+                <div class="std-center-wrapper">
+                    <div angrid="instancesGridOptions"></div>
+                </div>
+            </div>
+            <div class="tab-pane" title="{{'Balance'|i18n}}">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>{{'Account Balance'|i18n}}</td>
+                            <td>{{crash_remaining}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{'Coupon Balance'|i18n}}</td>
+                            <td>{{coupon_remaining}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" title="{{'Billing'|i18n}}">
+                <div id='billing_year_select' class="pull-right">
+                    <select ng-model="selected_year" class='input-small' ng-options="year for year in
+                        select_years">
+                    </select>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="std-center-wrapper">
+                        <div angrid="billingGridOptions"></div>
+                </div>
+
+            </div>
+            <!--
+            <div class="tab-pane" title="{{'Quota'|i18n}}">
+                <div class="row-fluid">
+                    <div class="span5 offset1">
+                        <quotaitem ng-repeat="(name, quota) in viewQuotas[0]"
+                        resource-name="name"
+                        resource-raw-limit="quota.raw_limit"
+                        resource-raw-used="quota.raw_used">
+                        </quotaitem>
+                    </div>
+                    <div class="span5 offset1">
+                        <quotaitem ng-repeat="(name, quota) in viewQuotas[1]"
+                        resource-name="name"
+                        resource-raw-limit="quota.raw_limit"
+                        resource-raw-used="quota.raw_used">
+                        </quotaitem>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+
+<div class="fade" ui-modal ng-model="create_project_shown">
+    <create-project-modal modal-shown="create_project_shown"></create-project-modal>  
+</div>
+
+<div class="fade" ui-modal ng-model="confirm_dialog_shown">
+    <confirm-dialog confirm_dialog_shown="confirm_dialog_shown"
+    action="delete_projects()"></confirm-dialog>
+</div>
+
+<div class="fade" ui-modal ng-model="edit_project_shown">
+    <edit-project-modal modal-shown="edit_project_shown"></edit-project-modal>
+</div>
+
+<div class="fade" ui-modal ng-model="manage_user_shown">
+    <manage-project-modal modal-shown="manage_user_shown"></manage-project-modal>
+</div>
+
+<div class="fade" ui-modal ng-model="modify_quota_shown">
+    <modify-quota-modal modal-shown="modify_quota_shown"></modify-quota-modal>
+</div>

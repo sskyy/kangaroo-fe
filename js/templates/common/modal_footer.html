@@ -1,0 +1,7 @@
+<div class="modal-footer">
+    <a class="btn" ng-click="close()">{{_cancelText}}</a>
+    <input type="submit" value="{{_okText|i18n}}"
+           upload-submit="completeUpload(content, completed)"
+           class="btn btn-primary"
+           ng-disabled="form_invalid()"/>
+</div>

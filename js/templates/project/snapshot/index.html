@@ -1,0 +1,92 @@
+<div class="actions">
+    <button class="btn btn-create"
+        ng-disabled="selectedItems.length!=1" ng-click="open_launch_instance()">
+    	<i class="icon-icon"></i>
+    	{{"Launch Instance"|i18n}}
+    </button>
+    <button class="btn btn-delete" ng-click="open_confirm_dialog()" ng-disabled="selectedItems.length==0">
+    	<i class="icon-icon"></i>
+    	{{"Delete Snapshot"|i18n}}
+    </button>
+    <button class="btn btn-edit" ng-click="update_snapshot()"
+        ng-disabled="selectedItems.length!=1">
+    	<i class="icon-icon"></i>
+    	{{"Update Snapshot"|i18n}}
+    </button>
+</div>
+
+<div id='snapshot_center_wrapper' class="center_wrapper std-center-wrapper activable">
+    <div class="upper_region">
+        <div angrid="gridOptions">
+        </div>
+    </div>
+    <div></div>
+    <div class="buttom_region">
+
+        <div class="tabbable">
+            <div class="tab-pane" title="{{'Detail'|i18n}}">
+                <table class="table detail table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="title">{{"Name" | i18n}}</th>
+                            <th>{{displayItem.name}}</th>
+                        </tr>  
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="title">{{ "ID" | i18n }}</td>
+                            <td class="content">{{displayItem.id}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Status" | i18n }}</td>
+                            <td class="content">
+                                {{displayItem.status.status}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Public" | i18n }}</td>
+                            <td class="content">{{displayItem.is_public}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Checksum" | i18n }}</td>
+                            <td class="content">{{displayItem.checksum}}</td>
+                        </tr><tr>
+                            <td class="title">{{ "Created" | i18n }}</td>
+                            <td class="content">{{displayItem.created_at}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Updated"|i18n}}</td>
+                            <td class="content">{{displayItem.updated_at}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Size"|i18n}}</td>
+                            <td class="content">{{displayItem.size}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Container Format"|i18n}}</td>
+                            <td class="content">{{displayItem.container_format}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Disk Format"|i18n}}</td>
+                            <td class="content">{{displayItem.disk_format}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title">{{"Image Type"|i18n}}</td>
+                            <td class="content">{{displayItem.properties.image_type}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ui-modal id="launch_instance_popmodal" class="fade" ng-model="launch_instance_shown">
+    <launch-instance launch_instance_shown='launch_instance_shown'></launch-instance>
+</div>
+
+<div ui-modal id="update_snapshot_popmodal" class="fade" ng-model="update_snapshot_shown">
+    <update-snapshot update_snapshot_shown='update_snapshot_shown'
+     selected_items="selectedItems"></update-snapshot>
+</div>
+
+<div ui-modal class="fade" ng-model="confirm_dialog_shown">
+    <confirm-dialog action="delete_snapshots()" confirm-dialog-shown="confirm_dialog_shown"></confirm-dialog>
+</div>

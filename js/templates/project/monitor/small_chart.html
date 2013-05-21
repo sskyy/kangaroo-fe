@@ -1,0 +1,11 @@
+<div class="small_chart_wrapper pull-left">
+    <div class="small_chart_title_bar clearfix">
+        <h4 class="chart_title">{{chart_title|i18n}}</h4>
+        <select class="input-small" 
+            ng-model="statistic_method" 
+            ng-change="statistic_method_changed()"
+            ng-options="method.value as method.name for method in statistic_methods">
+        </select>
+    </div>
+    <div id="{{chartId}}_chart" class="small_chart"></div>
+</div>

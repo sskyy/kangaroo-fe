@@ -1,0 +1,150 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_sg_modal()">x</a>
+        <div ng-switch on="updateSg">
+            <h3 ng-switch-when="false">{{"Create Security Group"|i18n}}</h3>
+            <h3 ng-switch-when="true">{{"Update Security Group"|i18n}}</h3>
+        </div>
+    </div>
+
+    <form novalidate class="form-horizontal" name="sg_form"
+        ng-submit="submit_sg(sg_form)">
+
+        <div class="modal-body clearfix">
+            <div class="row-fluid">
+                <div class="span6">
+                    <!-- new sg area, display on when creating -->
+                    <div class="style-well-none sg_info"  ng-hide="updateSg">
+                        <div >
+                            <div class="control-group"
+                                ng-class="{'error': sg_form.sg_name.$invalid}">
+                                <label for="sg_name"
+                                    class="control-label">{{"Name"|i18n}}</label>
+                                <div class="controls">
+                                    <input ui-jq="tooltip" ui-options="{title: name_not_null}"
+                                    name="sg_name" type="text" ng-model="sg_name" required/>
+                                </div>
+                            </div>
+                            <div class="control-group"
+                                ng-class="{'error': sg_form.sg_desc.$invalid}">
+                                <label for="sg_desc"
+                                    class="control-label">{{"Description"|i18n}}</label>
+                                <div class="controls">
+                                    <input ui-jq="tooltip" ui-options="{title:
+                                    desc_not_null}" type="text" name="sg_desc"
+                                    ng-model="sg_desc" required/>
+                                    <span class="help-block hide">
+                                        desc can't be null
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="style-well-bg">
+                        <!-- quick rules -->
+                        <div class="quick_add_rule">
+                            <header class="label">{{'Quick Add Rule'|i18n}}</header>
+                            <div class="rules">
+                                <div class="row-fluid" ng-repeat="rulelist in quick_rules">
+                                    <div class="span3" rule="rule" ng-repeat="rule in rulelist">
+                                        <a ng-class="{'selected': rule_mapping.has(rule)}"
+                                            ng-click="rule_mapping.toggle(rule)">
+                                            {{rule.name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- custom add rule -->
+                        <div class="add_rule">
+
+                            <header class="label">{{'Custom Add Rule'|i18n}}</header>
+                            <div class="control-group">
+                                <label for="protocol" class="control-label">{{"Protocol"|i18n}}</label>
+                                <div class="controls">
+                                    <select name="protocol" ng-model="protocol" ng-init="protocol='tcp'">
+                                        <option value="tcp">TCP</option>
+                                        <option value="udp">UDP</option>
+                                        <option value="icmp">ICMP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--display when protocol != icmp -->
+                            <div class="control-group" ng-show="protocol != 'icmp'"
+                                ng-class="{'error': sg_form.port_range.$invalid}">
+                                <label for="port-range" class="control-label">{{"Port Range"|i18n}}</label>
+                                <div class="controls">
+                                    <input ui-jq="tooltip" ui-options="{title: port_range_info}" type="text" ng-model="port_range" name="port_range"
+                                    required port-range-valid/>
+                                </div>
+                            </div>
+
+                            <!--display when protocol=icmp-->
+                            <div class="control-group" ng-show="protocol == 'icmp'">
+                                <label class="control-label" for="type">{{"Type"|i18n}}</label>
+                                <div class="controls">
+                                    <input ui-jq="tooltip" ui-options="{title: icmp_type_info}" 
+                                        class="input-mini" id="icmp-type" type="text"
+                                        ng-model="type" name="type" required integer
+                                        int-range="[-1,255]"
+                                        ng-class="{'error': sg_form.type.$invalid}"
+                                        />
+                                    <label class="control-label-append" for="code">{{"Code"|i18n}}</label>
+                                    <input ui-jq="tooltip" ui-options="{title: icmp_code_info}" 
+                                        class="input-mini" id="icmp-code" type="text"
+                                        ng-model="code" name="code" required integer
+                                        int-range="[-1,255]"
+                                        ng-class="{'error': sg_form.code.$invalid}"
+                                        />
+                                </div>
+                            </div>
+
+                            <div class="control-group"
+                                ng-class="{'error':sg_form.source.$invalid}">
+                                <label for="source" class="control-label">{{"Source"|i18n}}</label>
+                                <div class="controls">
+                                    <input ui-jq="tooltip" ui-options="{title: source_info}" id="source" name="source" type="text"
+                                    ng-model="source" source-valid required ng-init="source='0.0.0.0/0'"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <a class="btn btn-primary btn-small pull-right" ng-click="new_rule(sg_form)"
+                                        ng-disabled="!add_rule_valid(sg_form)">
+                                        {{'Add Rule'|i18n}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- rules to be added -->
+                <div class="rule-tables span6">
+                    <table class="table table-hover table-condensed"
+                         ng-repeat="category in rule_categories"
+                         ng-hide="rule_mapping.count(category.protocol)==0">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="title in category.cols">{{title}}</th>
+                                <th></th>
+                            </tr>  
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rule in rule_mapping.get(category.protocol)">
+                                <td ng-repeat="col in category_col_order(category)">{{rule[col]}}</td>
+                                <td><a type="button" class="close" ng-click="rule_mapping.remove(rule)">&times;</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- dialog footer -->
+        <div class="sg_footer">
+            <div class="modal-footer">
+                <a class="btn" ng-click="close_sg_modal()">{{'Cancel'|i18n}}</a>
+                <input class="btn btn-primary" type="submit" value='{{"Submit"|i18n}}' ng-disabled="!can_submit(sg_form)"/>
+            </div>
+        </div>
+    </form>
+</div>

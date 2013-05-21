@@ -1,0 +1,65 @@
+// variables
+
+@sideBarMenuActive: @primaryColor;
+@sideBarLinkColor: #000;
+
+// -------------------------------------
+#sidebar {
+  .menu {
+    padding: 0;
+    li {
+      cursor: pointer;
+      background-color: @white;
+      a {
+        padding: 8px 12px;
+        margin: 0;
+        color: @sideBarLinkColor;
+        opacity: .5;
+        &:hover{
+          //background-color: lighten(@sideBarMenuActive,15%);
+          //color: #fafafa;
+        }
+      }
+    }
+    .icon-chevron-down, .icon-chevron-right {
+      float: right;
+      margin-top: 2px;
+      margin-right: -6px;
+    }
+    .menu-header {
+      color:#000;
+      padding: 8px 12px;
+      background: @white;
+      line-height: @baseLineHeight;
+      .box-shadow(0px 2px 3px #ddd);
+      font-size:16px;
+    }
+    .nav{
+      margin-bottom: 0;
+      .active a{
+        opacity: 1;
+        background-color: @sideBarMenuActive;
+        color:@white;
+        .icon-icon{
+          .icon-white;
+        }
+      }
+    }
+    .nav-group{
+      margin-top:3px;
+    }
+  }
+  .icon-icon{
+    background-position: 0 0;
+    // background-image: ;
+  }
+
+  .sidebar-overview .icon-icon{
+    
+  }
+
+  .sidebar-instance .icon-icon{
+    
+  }
+}
+

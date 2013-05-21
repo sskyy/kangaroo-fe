@@ -1,0 +1,16 @@
+<div>
+    <modal-header title="Edit Volume Attachment"></modal-header>
+
+    <form novalidate class="form-horizontal" name="edit_attachment_form"
+        ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <b-select label="Instances" model="instance_id"
+                options="instance_list" option_name="name"></b-select>
+            <b-input placeholder="/dev/vdc" label="Device Name" model="device"></b-input>
+
+            <modal-desc desc="Attach a volume to an instance"></modal-desc>
+        </div>
+
+        <modal-footer form_invalid="form_invalid"></modal-footer>
+    </form>
+</div>

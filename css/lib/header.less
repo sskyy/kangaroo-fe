@@ -1,0 +1,59 @@
+// variables
+
+@navbarBorderColor: @primaryColor;
+@hasSlogan: false;
+@btnHasBorder: false;
+
+// mixins
+
+.has-slogan (@hasSlogan) when not (@hasSlogan){
+  .slogan{
+    display:none;
+  }
+}
+
+.btn-has-border (@btnHasBorder) when not (@btnHasBorder){
+  .border-radius(0);
+  background:none;
+  border:none;
+  box-shadow: none;
+}
+
+// --------------------------------------------------
+
+#header {
+  .navbar {
+    min-width: 1000px;
+    z-index: 100;
+    margin: 0;
+    .navbar-inner {
+      min-height: @customNavbarHeight;
+      #gradient > .vertical(@white, @white);
+      border-width: 0px;
+      border-bottom: @navbarBorderWidth solid @navbarBorderColor;
+      .box-shadow(0 3px 6px rgba(0,0,0,.2));
+    }
+  }
+  .brand {
+    padding: 0 0 0 20px;
+    margin: 0;
+    .logo {
+      text-shadow: 0 -1px 0px #000;
+      display: block;
+      text-decoration: none;
+      line-height: @customNavbarHeight;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFF;
+      .has-slogan(@hasSlogan);
+    }
+  }
+  .user-info {
+    float: right;
+    margin-right: 10px;
+    line-height: @customNavbarHeight - 5px;
+    .btn{
+      .btn-has-border(@btnHasBorder);
+    }
+  }
+}

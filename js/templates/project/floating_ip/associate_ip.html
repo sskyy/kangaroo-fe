@@ -1,0 +1,40 @@
+<div>
+    <div class="modal-header">
+		<a class="close" ng-click="closeModal()">x</a>
+        <h3>{{"Associate IP"|i18n}}</h3>
+    </div>
+	<form novalidate class="form-horizontal" name="associate_ip_form"
+	ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{'Floating IP'|i18n}}</label>
+                <div class="controls">
+                    <input ng-model="floating_ip" name="floating_ip" readonly/>
+                </div>
+            </div>   
+            <div class="control-group">
+                <label class="control-label">{{'Instance'|i18n}}</label>
+                <div class="controls">
+                    <select ng-model="instance_uuid" 
+                        ng-options="ins.id as ins.name for ins in instance_list">
+                    </select>
+                </div>
+            </div>
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{'Description'|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>
+                    Associate a floating ip with an instance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <a class="btn" ng-click="closeModal()">Cancel</a>
+        <input class="btn btn-primary"
+        type="submit" value='{{"Associate"|i18n}}'/>
+    </div>
+    </form>
+</div>

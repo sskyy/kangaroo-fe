@@ -1,0 +1,56 @@
+<div>
+	<div class="modal-header">
+		<a class="close" ng-click="close_keypair_modal()">x</a>
+		<div ng-switch on="importKeypair">
+			<h3 ng-switch-when="false">{{"Create Keypair"|i18n}}</h3>
+			<h3 ng-switch-when="true">{{"Import Keypair"|i18n}}</h3>
+		</div>
+	</div>
+
+	<form novalidate class="form-horizontal" name="keypair_form"
+	ng-submit="submit_keypair(keypair_form)">
+
+		<div class="modal-body clearfix">
+
+            <div class="control-group" ng-class="{'error': keypair_form.keypair_name.$invalid}">
+				<label class="control-label">{{"Keypair Name"|i18n}}</label>
+				<div class="controls">
+					<input type="text" name="keypair_name"
+          ng-model="keypair_name" required keypair-name-valid />
+                    <span class="help-inline"
+                        ng-show="keypair_form.keypair_name.$error.required">{{"Name not null"|i18n}}</span>
+                    <span class="help-inline"
+                        ng-show="keypair_form.keypair_name.$error.key_name_valid">{{"name existed"|i18n}}</span>
+				</div>
+			</div>
+
+			<div class="control-group" ng-hide="!importKeypair">
+				<label  class="control-label">{{"Public Key"|i18n}}</label>
+				<div class="controls">
+					<textarea  ng-model="public_key" name="public_key" required ></textarea>
+				</div>
+			</div>
+
+			<div class="style-quota">
+				<div class="head">
+					<span class="title">{{'Description'|i18n}}</span>
+				</div>
+				<div class="body">
+					<p>
+          {{"Keypairs are ssh credentials which are injected into images when they are launched. Creating a new key pair registers the public key and downloads the private key (a .pem file)."|i18n}}
+					</p>
+					<p>
+          {{"Protect and use the key as you would any normal ssh private key."|i18n}}
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- dialog footer -->
+		<div class="modal-footer">
+			<a class="btn" ng-click="close_keypair_modal()">{{'Cancel'|i18n}}</a>
+			<input class="btn btn-primary"
+			type="submit" value="{{'Submit'|i18n}}"
+			ng-disabled="!can_submit(keypair_form)"/>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <h3>{{"Load Coupon"|i18n}}</h3>
+    </div>
+
+    <form class="form-horizontal" name="load_coupon_form" ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{"Coupon Code"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" ng-model="code" name="code" required/>
+                </div>
+            </div>
+
+            <!--
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{"Description"|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>{{""|i18n}}</p>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn cancel" ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+            <input type="submit" class="btn btn-primary"
+            ng-disabled="load_coupon_form.$invalid"
+            value="{{'Submit'|i18n}}"/>
+        </div>
+    </form>
+</div>

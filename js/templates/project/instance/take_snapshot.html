@@ -1,0 +1,32 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <h3>{{"Take Snapshot"|i18n}}</h3>
+    </div>
+
+    <form class="form-horizontal" name="take_snapshto_form" ng-submit="submit()">
+        <div class="modal-body clearfix">
+            <div class="control-group">
+                <label class="control-label">{{"Name"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" ng-model="name" name="name"/>
+                </div>
+            </div>
+
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{"Description"|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>{{"Snapshots preserve the disk state of a running instance."|i18n}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn cancel" ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+            <input type="submit" class="btn btn-primary"
+            value="{{'Submit'|i18n}}"/>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,39 @@
+<div>
+    <div class="modal-header">
+        <a class="close" ng-click="close_modal()">x</a>
+        <h3>{{"Create Coupon"|i18n}}</h3>
+    </div>
+    <form novalidate class="form-horizontal" name="create_coupon_form"
+        ng-submit="submit()">
+        <div class="modal-body">
+            <div class="control-group">
+                <label class="control-label">{{"Count"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" ng-model="count" name="count"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">{{"Coupon Value"|i18n}}</label>
+                <div class="controls">
+                    <input type="text" ng-model="value" name="value"/>
+                </div>
+            </div>
+
+            <div class="style-quota">
+                <div class="head">
+                    <span class="title">{{"Description"|i18n}}</span>
+                </div>
+                <div class="body">
+                    <p>{{"You can create 100 coupon at one time, up to 10000/per"|i18n}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary pull-right"
+            value="{{'Create'|i18n}}"/>
+            <a class="btn cancel"
+                ng-click="close_modal()">{{"Cancel"|i18n}}</a>
+        </div>
+    </form>
+</div>

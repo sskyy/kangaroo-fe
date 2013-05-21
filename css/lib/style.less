@@ -1,0 +1,177 @@
+/* .modal std */
+.modal{
+  form{
+    margin: 0;
+  }
+}
+
+/* bootstrap style reset */
+.control-group.error
+{
+  > label{
+    color:#000;
+  }
+  input, select, textarea {
+    border-color: #CCC;
+  }
+}
+
+/* style utility , */
+
+.style-quota{
+  .head{
+    width:100%;
+    padding: 3px 0;
+    .title { font-weight: bold; }
+    a { float: right; }
+  }
+  .body{
+    .style-well-bg;
+    &:empty{
+      padding:0px;
+    }
+  }
+}
+
+.style-well-bg{
+  background-color: @wellBackground;
+  .style-well-none;
+}
+
+.style-well-none{
+  .border-radius(5px);
+  padding: 10px;
+}
+
+.std-center-wrapper{
+
+  height: 500px;
+
+  > .hsplitbar{
+    height: 5px;
+    background-color: #f7f7f7;
+  }
+
+  > .hsplitbar:hover{
+    background-color: #eee;
+  }
+  
+  &.activable {
+    .buttom_region, .hsplitbar{
+      display: none;
+    }
+
+    &.active {
+      .buttom_region, .hsplitbar{
+        display: block;
+      }
+    }
+  }
+
+  .upper_region {
+  }
+  .buttom_region {
+    overflow-y: auto;
+    .nav{
+      margin-bottom: 0;
+      padding-left: 10px;
+      margin-top:10px;
+      height: 36px;
+    }
+    .tab-pane{
+      padding:5px;
+      padding-top:20px;
+      .table.detail{
+        table-layout: fixed;
+        thead{
+          tr{
+            th{
+              padding-bottom:10px;
+              &.title{
+                width:200px;
+              }
+            }
+          }
+        }
+        tbody{
+          tr{
+            td{
+              border:none;
+              overflow: hidden;
+            }
+          }
+        }
+        .title{
+          text-align: right;
+          font-weight: bold;
+          padding-right:20px;
+        }
+      }
+    }
+  }
+}
+
+/* style patch for jqplot */
+.jqplot-highlighter-tooltip, .jqplot-canvasOverlay-tooltip {
+  border: none;
+  background: rgba(0,0,0,0.5);
+  font-size: 0.75em;
+  color: #fff;
+}
+
+.jqplot-highlighter-tooltip{
+  font-size: 1em;
+  padding: 8px;
+  text-align: right;
+}
+
+.jqplot-highlighter-tooltip *{
+  padding: 0;
+  margin: 0;
+}
+
+.jqplot-highlighter-tooltip big{
+  font-size:2.5em;
+}
+
+
+/* override bootstrap button style */
+.buttonBackground(@startColor, @endColor, @textColor: #fff, @textShadow: 0 -1px 0 rgba(0,0,0,.25)) {
+  // gradientBar will set the background to a pleasing blend of these, to support IE<=9
+  .gradientBar(@startColor, @endColor, @textColor, @textShadow);
+  *background-color: @endColor; /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+  .reset-filter();
+
+  // in these cases the gradient won't cover the background, so we override
+  &:hover, &:active, &.active, &.disabled, &[disabled] {
+    color: @textColor;
+    background-color: @endColor;
+    *background-color: darken(@endColor, 5%);
+  }
+  // IE 7 + 8 can't handle box-shadow to show active, so we darken a bit ourselves
+  &:active,
+  &.active {
+    background-color: darken(@endColor, 10%) e("\9");
+  }
+}
+
+.btn.btn-primary{
+  .buttonBackground(#5687d7, #3570cf );
+}
+
+/* angrid override */
+.anGrid{
+  border-radius : 5px;
+  .anHead{
+    //background: -webkit-linear-gradient(#e6e6e6,#cccccc);
+    //-webkit-box-shadow: #fff 0 1px 0 0 inset;
+    //text-shadow: 0 1px 0 #eee;
+    font-weight: normal;
+    box-shadow: 0 2px 3px #ddd;
+    color:#828282;
+  }
+  .th-list ul>li.selected{
+    background-color: #5687d7;
+
+  }
+}
